@@ -1,0 +1,2403 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>หมอโรงงาน — Carbon Service Playbook 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:       #0A192F;
+  --navy-mid:   #112240;
+  --navy-light: #1D3461;
+  --emerald:    #10B981;
+  --emerald-d:  #059669;
+  --emerald-dim:rgba(16,185,129,0.12);
+  --emerald-mid:rgba(16,185,129,0.28);
+  --bg-page:    #F0F4F8;
+  --bg-card:    #FFFFFF;
+  --bg-muted:   #F3F4F6;
+  --bg-dark:    #E8EDF3;
+  --text-main:  #1F2937;
+  --text-sub:   #4B5563;
+  --text-muted: #9CA3AF;
+  --amber:      #D97706;
+  --amber-dim:  rgba(217,119,6,0.12);
+  --red:        #DC2626;
+  --red-dim:    rgba(220,38,38,0.10);
+  --blue:       #2563EB;
+  --blue-dim:   rgba(37,99,235,0.10);
+  --teal:       #0D9488;
+  --teal-dim:   rgba(13,148,136,0.10);
+  --line:       rgba(10,25,47,0.08);
+  --line2:      rgba(10,25,47,0.15);
+  --r:          8px;
+  --r-lg:       12px;
+  --r-xl:       16px;
+  --mono:       'IBM Plex Mono', monospace;
+  --sans:       'Sarabun', system-ui, sans-serif;
+  --shadow-sm:  0 1px 3px rgba(10,25,47,0.08), 0 1px 2px rgba(10,25,47,0.05);
+  --shadow:     0 4px 12px rgba(10,25,47,0.10), 0 2px 4px rgba(10,25,47,0.06);
+  --shadow-lg:  0 10px 30px rgba(10,25,47,0.12);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--sans);
+  background: var(--bg-page);
+  color: var(--text-main);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* ─── HEADER ─── */
+.site-header {
+  position: sticky; top: 0; z-index: 200;
+  background: var(--navy);
+  border-bottom: 1px solid rgba(16,185,129,0.2);
+  padding: 0 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 62px;
+  box-shadow: 0 2px 20px rgba(10,25,47,0.4);
+}
+.logo { display: flex; align-items: center; gap: 12px; }
+.logo-mark {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: var(--emerald);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px; color: var(--navy); flex-shrink: 0;
+  letter-spacing: -0.02em;
+}
+.logo-name { font-size: 16px; font-weight: 700; color: #fff; letter-spacing: 0.01em; }
+.logo-tagline { font-size: 11px; color: rgba(255,255,255,0.45); font-family: var(--mono); }
+.header-right { display: flex; align-items: center; gap: 12px; }
+.live-chip {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(220,38,38,0.15);
+  border: 1px solid rgba(220,38,38,0.35);
+  border-radius: 20px; padding: 5px 12px;
+  font-size: 11px; font-weight: 600; color: #FCA5A5;
+  font-family: var(--mono);
+}
+.live-dot { width: 6px; height: 6px; border-radius: 50%; background: #EF4444; animation: blink 1.4s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+.date-chip { font-size: 11px; color: rgba(255,255,255,0.35); font-family: var(--mono); }
+
+/* ─── KPI STRIP ─── */
+.kpi-strip {
+  background: var(--navy-mid);
+  border-bottom: 1px solid rgba(16,185,129,0.15);
+  padding: 10px 28px;
+  display: flex; gap: 32px; align-items: center;
+  overflow-x: auto; scrollbar-width: none;
+}
+.kpi-strip::-webkit-scrollbar { display: none; }
+.kpi-item { display: flex; flex-direction: column; gap: 1px; white-space: nowrap; }
+.kpi-label { font-size: 9.5px; color: rgba(255,255,255,0.35); font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.09em; }
+.kpi-value { font-size: 14px; font-weight: 700; font-family: var(--mono); }
+.kv-green { color: var(--emerald); }
+.kv-amber { color: #FBBF24; }
+.kv-red { color: #F87171; }
+.kv-blue { color: #60A5FA; }
+.kpi-div { width: 1px; height: 30px; background: rgba(255,255,255,0.08); flex-shrink: 0; }
+
+/* ─── NAV ─── */
+.nav-wrap {
+  background: var(--bg-card);
+  border-bottom: 2px solid var(--bg-dark);
+  padding: 0 28px;
+  display: flex; gap: 0; overflow-x: auto;
+  scrollbar-width: none; position: sticky; top: 62px; z-index: 150;
+  box-shadow: var(--shadow-sm);
+}
+.nav-wrap::-webkit-scrollbar { display: none; }
+.nav-tab {
+  padding: 13px 14px; font-size: 12.5px; font-weight: 500;
+  color: var(--text-muted); cursor: pointer; white-space: nowrap;
+  border-bottom: 3px solid transparent; border-top: none; border-left: none; border-right: none;
+  background: none; font-family: var(--sans); transition: color .2s, border-color .2s;
+  letter-spacing: 0;
+}
+.nav-tab:hover { color: var(--text-sub); }
+.nav-tab.active { color: var(--navy); border-bottom-color: var(--emerald); font-weight: 600; }
+
+/* ─── SECTIONS ─── */
+.section { display: none; }
+.section.active { display: block; }
+.page-body { max-width: 1080px; margin: 0 auto; padding: 36px 28px 100px; }
+
+/* ─── TYPE ─── */
+h2 { font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+h3 { font-size: 18px; font-weight: 600; color: var(--navy); margin-bottom: 12px; }
+h4 { font-size: 15px; font-weight: 600; color: var(--text-main); margin-bottom: 8px; }
+p { font-size: 15px; color: var(--text-sub); line-height: 1.75; margin-bottom: 10px; }
+p:last-child { margin-bottom: 0; }
+strong { color: var(--text-main); font-weight: 600; }
+.mono { font-family: var(--mono); }
+
+/* ─── SECTION LABEL ─── */
+.sec-label {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--text-muted); margin-bottom: 18px; margin-top: 36px;
+}
+.sec-label:first-child { margin-top: 0; }
+.sec-label::before { content: ''; width: 3px; height: 14px; background: var(--emerald); border-radius: 2px; flex-shrink: 0; }
+.sec-label::after { content: ''; flex: 1; height: 1px; background: var(--line2); }
+
+/* ─── ALERT BOXES ─── */
+.alert {
+  border-radius: var(--r-lg); padding: 16px 20px;
+  margin-bottom: 22px; font-size: 15px; line-height: 1.7;
+  border-left: 4px solid; box-shadow: var(--shadow-sm);
+}
+.alert-red    { background: #FEF2F2; border-color: var(--red); color: #991B1B; }
+.alert-green  { background: #ECFDF5; border-color: var(--emerald); color: #065F46; }
+.alert-amber  { background: #FFFBEB; border-color: var(--amber); color: #92400E; }
+.alert-navy   { background: var(--navy); border-color: var(--emerald); color: rgba(255,255,255,0.85); }
+.alert-navy strong { color: var(--emerald); }
+
+/* ─── STAT CARDS ─── */
+.stat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 28px; }
+.stat-card {
+  background: var(--bg-card); border: 1px solid var(--line2);
+  border-radius: var(--r-xl); padding: 22px 24px;
+  box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+}
+.stat-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.sc-green::before { background: var(--emerald); }
+.sc-amber::before { background: var(--amber); }
+.sc-red::before   { background: var(--red); }
+.sc-blue::before  { background: var(--blue); }
+.stat-label { font-size: 11.5px; color: var(--text-muted); margin-bottom: 8px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
+.stat-value { font-size: 30px; font-weight: 700; line-height: 1.1; margin-bottom: 6px; font-family: var(--mono); }
+.stat-sub { font-size: 12.5px; color: var(--text-sub); }
+.sv-green { color: var(--emerald-d); }
+.sv-amber { color: var(--amber); }
+.sv-red   { color: var(--red); }
+.sv-blue  { color: var(--blue); }
+
+/* ─── TAGS ─── */
+.tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 600; padding: 3px 9px;
+  border-radius: 20px; white-space: nowrap; font-family: var(--mono);
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.tag-red   { background: var(--red-dim); color: var(--red); border: 1px solid rgba(220,38,38,0.2); }
+.tag-amber { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(217,119,6,0.2); }
+.tag-green { background: var(--emerald-dim); color: var(--emerald-d); border: 1px solid rgba(16,185,129,0.25); }
+.tag-blue  { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(37,99,235,0.2); }
+.tag-navy  { background: rgba(10,25,47,0.08); color: var(--navy); border: 1px solid rgba(10,25,47,0.15); }
+.tag-teal  { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(13,148,136,0.2); }
+
+/* ─── CARDS ─── */
+.card {
+  background: var(--bg-card); border: 1px solid var(--line2);
+  border-radius: var(--r-xl); padding: 22px 24px;
+  box-shadow: var(--shadow-sm);
+}
+.card-dark {
+  background: var(--navy); border: 1px solid rgba(16,185,129,0.2);
+  border-radius: var(--r-xl); padding: 22px 24px;
+}
+.card-dark h3, .card-dark h4 { color: #fff; }
+.card-dark p, .card-dark li { color: rgba(255,255,255,0.7); }
+
+/* ─── GRID LAYOUTS ─── */
+.two-col   { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.mb-8  { margin-bottom: 8px; }
+.mb-16 { margin-bottom: 16px; }
+.mb-24 { margin-bottom: 24px; }
+.mb-32 { margin-bottom: 32px; }
+
+/* ─── TABLE ─── */
+.tbl { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14px; background: var(--bg-card); border-radius: var(--r-xl); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--line2); }
+.tbl thead { background: var(--navy); }
+.tbl th { text-align: left; font-size: 11.5px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: rgba(255,255,255,0.6); padding: 13px 16px; font-family: var(--mono); }
+.tbl td { padding: 13px 16px; border-bottom: 1px solid var(--line); color: var(--text-sub); vertical-align: top; font-size: 14px; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl tbody tr:hover td { background: var(--bg-muted); }
+.tbl td.emph { color: var(--text-main); font-weight: 600; }
+
+/* ─── BAR CHART ─── */
+.bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.bar-name { font-size: 13px; color: var(--text-sub); width: 170px; flex-shrink: 0; }
+.bar-bg { flex: 1; height: 8px; background: var(--bg-dark); border-radius: 4px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 4px; }
+.bar-val { font-size: 13px; font-family: var(--mono); color: var(--text-main); font-weight: 600; width: 80px; text-align: right; }
+
+/* ─── ROLE PILLS ─── */
+.rp { font-size: 10.5px; padding: 2px 8px; border-radius: 10px; white-space: nowrap; font-weight: 700; flex-shrink: 0; font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.05em; }
+.rp-mkt   { background: #DBEAFE; color: #1D4ED8; }
+.rp-sales { background: #FEE2E2; color: #B91C1C; }
+.rp-asst  { background: #FEF3C7; color: #B45309; }
+.rp-all   { background: #D1FAE5; color: #065F46; }
+
+/* ─── TIMELINE ─── */
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before { content: ''; position: absolute; left: 9px; top: 10px; bottom: 0; width: 2px; background: var(--bg-dark); border-radius: 1px; }
+.tl-item { position: relative; margin-bottom: 28px; }
+.tl-dot {
+  position: absolute; left: -28px; top: 5px;
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid; background: var(--bg-card);
+}
+.tld-green { border-color: var(--emerald); box-shadow: 0 0 0 4px var(--emerald-dim); }
+.tld-amber { border-color: var(--amber); box-shadow: 0 0 0 4px var(--amber-dim); }
+.tld-red   { border-color: var(--red);   box-shadow: 0 0 0 4px var(--red-dim); }
+.tl-week { font-family: var(--mono); font-size: 11px; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.08em; }
+.tl-title { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.tl-body { background: var(--bg-card); border: 1px solid var(--line2); border-radius: var(--r-lg); padding: 16px 20px; box-shadow: var(--shadow-sm); }
+.tl-tasks { list-style: none; }
+.tl-tasks li { padding: 8px 0; border-bottom: 1px solid var(--line); display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--text-sub); }
+.tl-tasks li:last-child { border-bottom: none; }
+.tl-kpi { margin-top: 12px; background: var(--navy); border-radius: var(--r); padding: 10px 14px; font-size: 13px; color: rgba(255,255,255,0.7); font-family: var(--mono); }
+.tl-kpi strong { color: var(--emerald); font-weight: 700; }
+
+/* ─── OFFER CARDS ─── */
+.offer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.offer-card {
+  background: var(--bg-card); border: 1px solid var(--line2);
+  border-radius: var(--r-xl); padding: 24px 26px;
+  box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+}
+.offer-card.hero { border: 2px solid var(--emerald); box-shadow: 0 0 0 4px var(--emerald-dim), var(--shadow); }
+.offer-card.hero::before { content: 'HERO PRODUCT'; position: absolute; top: 16px; right: -24px; background: var(--emerald); color: var(--navy); font-size: 9px; font-weight: 800; font-family: var(--mono); padding: 3px 36px; transform: rotate(45deg); letter-spacing: 0.08em; }
+.offer-tag { font-size: 11px; font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.09em; margin-bottom: 8px; font-weight: 600; }
+.offer-name { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.offer-price { font-size: 32px; font-weight: 800; color: var(--emerald-d); margin-bottom: 3px; line-height: 1; font-family: var(--mono); }
+.offer-price span { font-size: 14px; color: var(--text-muted); font-weight: 400; font-family: var(--sans); }
+.offer-note { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; font-family: var(--mono); }
+.offer-items { list-style: none; margin-bottom: 14px; }
+.offer-items li { padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 14px; color: var(--text-sub); display: flex; gap: 9px; }
+.offer-items li:last-child { border-bottom: none; }
+.offer-items li::before { content: '▸'; color: var(--emerald); flex-shrink: 0; font-size: 12px; margin-top: 2px; }
+.offer-why { padding: 10px 14px; border-radius: var(--r); font-size: 13px; font-weight: 500; }
+.ow-green { background: #ECFDF5; color: #065F46; }
+.ow-amber { background: #FFFBEB; color: #92400E; }
+.ow-navy  { background: var(--navy); color: rgba(255,255,255,0.75); }
+.ow-blue  { background: #EFF6FF; color: #1E40AF; }
+
+/* ─── CHECKLIST ─── */
+.check-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 10px 14px; border-radius: var(--r);
+  cursor: pointer; transition: background .15s; margin-bottom: 4px;
+}
+.check-item:hover { background: var(--bg-muted); }
+.check-item input[type="checkbox"] { margin-top: 2px; accent-color: var(--emerald); width: 16px; height: 16px; flex-shrink: 0; cursor: pointer; }
+.check-item label { font-size: 14px; color: var(--text-sub); cursor: pointer; flex: 1; line-height: 1.55; }
+.check-item.done label { text-decoration: line-through; color: var(--text-muted); }
+.check-group-title { font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 10px; margin-top: 20px; display: flex; align-items: center; gap: 8px; }
+
+/* ─── FUNNEL STEPS ─── */
+.funnel-step {
+  display: flex; gap: 18px; padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+.funnel-step:last-child { border-bottom: none; }
+.funnel-num {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--navy); color: var(--emerald);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; font-family: var(--mono);
+  flex-shrink: 0; margin-top: 2px; box-shadow: var(--shadow-sm);
+}
+.funnel-title { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
+.funnel-desc  { font-size: 14px; color: var(--text-sub); line-height: 1.65; }
+.funnel-meta  { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+.funnel-metric { font-size: 11px; font-family: var(--mono); padding: 3px 9px; border-radius: 4px; background: var(--bg-muted); color: var(--text-sub); border: 1px solid var(--line2); }
+
+/* ─── EMAIL TEMPLATE BLOCK ─── */
+.email-block {
+  background: var(--bg-card); border: 1px solid var(--line2);
+  border-radius: var(--r-xl); overflow: hidden;
+  box-shadow: var(--shadow); margin-bottom: 24px;
+}
+.email-header {
+  background: var(--navy); padding: 14px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.email-header-title { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.9); }
+.email-header-tag { font-size: 10px; font-family: var(--mono); background: var(--emerald-dim); color: var(--emerald); border: 1px solid rgba(16,185,129,0.3); padding: 3px 9px; border-radius: 20px; }
+.email-meta { background: var(--bg-muted); padding: 12px 20px; border-bottom: 1px solid var(--line2); }
+.email-meta-row { display: flex; gap: 10px; font-size: 13px; color: var(--text-sub); margin-bottom: 4px; }
+.email-meta-row:last-child { margin-bottom: 0; }
+.email-meta-row span:first-child { color: var(--text-muted); width: 60px; flex-shrink: 0; font-family: var(--mono); font-size: 12px; }
+.email-body { padding: 20px 24px; font-size: 14.5px; line-height: 1.8; color: var(--text-sub); }
+.email-body .subj { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 14px; display: block; }
+.email-highlight { background: #ECFDF5; border-left: 3px solid var(--emerald); padding: 10px 14px; border-radius: 0 var(--r) var(--r) 0; margin: 12px 0; font-size: 14px; color: #065F46; }
+.email-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--navy); color: var(--emerald); padding: 10px 20px; border-radius: var(--r); font-weight: 600; font-size: 13.5px; margin-top: 14px; text-decoration: none; }
+.email-footer { padding: 12px 20px; background: var(--bg-muted); border-top: 1px solid var(--line2); font-size: 12px; color: var(--text-muted); }
+
+/* ─── COMPETITOR GRID ─── */
+.comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.comp-card { background: var(--bg-card); border: 1px solid var(--line2); border-radius: var(--r-xl); padding: 20px 22px; box-shadow: var(--shadow-sm); }
+.comp-name { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.comp-type { font-size: 11.5px; color: var(--text-muted); font-family: var(--mono); margin-bottom: 14px; }
+.comp-row { display: flex; justify-content: space-between; font-size: 13.5px; padding: 6px 0; border-bottom: 1px solid var(--line); color: var(--text-sub); }
+.comp-row:last-child { border-bottom: none; }
+.comp-row span:first-child { color: var(--text-muted); }
+
+/* ─── PROGRESS ─── */
+.progress-wrap { background: var(--bg-card); border: 1px solid var(--line2); border-radius: var(--r-xl); padding: 20px 24px; box-shadow: var(--shadow-sm); }
+.progress-track { height: 12px; background: var(--bg-dark); border-radius: 6px; overflow: hidden; margin: 10px 0; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--emerald), #06B6D4); border-radius: 6px; transition: width .4s ease; }
+
+/* ─── SECTION INTRO ─── */
+.section-intro { background: var(--navy); border-radius: var(--r-xl); padding: 28px 32px; margin-bottom: 28px; box-shadow: var(--shadow-lg); }
+.section-intro h2 { color: #fff; font-size: 24px; margin-bottom: 6px; }
+.section-intro p { color: rgba(255,255,255,0.6); font-size: 15px; margin-bottom: 0; }
+.section-intro .intro-meta { display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+
+/* ─── SCROLL PROGRESS ─── */
+.scroll-progress { position: fixed; top: 62px; left: 0; right: 0; height: 3px; background: rgba(0,0,0,0.06); z-index: 190; }
+.scroll-bar { height: 100%; background: var(--emerald); width: 0; transition: width .08s; }
+
+/* responsive */
+@media (max-width: 720px) {
+  .stat-grid, .comp-grid, .offer-grid, .two-col, .three-col { grid-template-columns: 1fr; }
+  .kpi-strip { display: none; }
+  .page-body { padding: 24px 18px 80px; }
+}
+</style>
+</head>
+<body>
+
+<div class="scroll-progress"><div class="scroll-bar" id="scrollBar"></div></div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="logo">
+    <div class="logo-mark">ห</div>
+    <div>
+      <div class="logo-name">หมอโรงงาน Carbon Service</div>
+      <div class="logo-tagline">Smart Sustainability Playbook 2026</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="live-chip"><div class="live-dot"></div>CBAM DEFINITIVE PHASE</div>
+    <div class="date-chip">มี.ค. 2026</div>
+  </div>
+</header>
+
+<!-- KPI STRIP -->
+<div class="kpi-strip">
+  <div class="kpi-item"><div class="kpi-label">Revenue Target</div><div class="kpi-value kv-green">฿3,000,000</div></div>
+  <div class="kpi-div"></div>
+  <div class="kpi-item"><div class="kpi-label">90 Days</div><div class="kpi-value kv-amber">10–20 Deals</div></div>
+  <div class="kpi-div"></div>
+  <div class="kpi-item"><div class="kpi-label">CFO Penetration</div><div class="kpi-value kv-red">1.5% / 71,130</div></div>
+  <div class="kpi-div"></div>
+  <div class="kpi-item"><div class="kpi-label">CBAM Exposure TH</div><div class="kpi-value kv-amber">฿28B / Year</div></div>
+  <div class="kpi-div"></div>
+  <div class="kpi-item"><div class="kpi-label">T-VER Price</div><div class="kpi-value kv-green">฿174 / tCO₂</div></div>
+  <div class="kpi-div"></div>
+  <div class="kpi-item"><div class="kpi-label">VVB Registered TH</div><div class="kpi-value kv-blue">18 Bodies</div></div>
+  <div class="kpi-div"></div>
+  <div class="kpi-item"><div class="kpi-label">CBAM Competitors</div><div class="kpi-value kv-red">2–3 Firms Only</div></div>
+</div>
+
+<!-- NAV -->
+<nav class="nav-wrap">
+  <button class="nav-tab active" onclick="window.switchTab(0)">📊 ตลาด</button>
+  <button class="nav-tab" onclick="window.switchTab(1)">🎯 Segments</button>
+  <button class="nav-tab" onclick="window.switchTab(2)">⚔️ คู่แข่ง</button>
+  <button class="nav-tab" onclick="window.switchTab(3)">💰 Pricing</button>
+  <button class="nav-tab" onclick="window.switchTab(4)">🏹 Sales</button>
+  <button class="nav-tab" onclick="window.switchTab(5)">📦 Packages</button>
+  <button class="nav-tab" onclick="window.switchTab(6)">📢 Marketing</button>
+  <button class="nav-tab" onclick="window.switchTab(7)">📧 Emails</button>
+  <button class="nav-tab" onclick="window.switchTab(8)">📅 Timeline</button>
+  <button class="nav-tab" onclick="window.switchTab(9)">✅ Checklist</button>
+</nav>
+
+<!-- ════════════════════════════════════════
+     TAB 0: MARKET OVERVIEW
+════════════════════════════════════════ -->
+<div class="section active" id="tab0">
+<div class="page-body">
+  <div class="section-intro">
+    <h2>ตลาด Carbon ไทยอยู่ที่จุดเปลี่ยน — โอกาสสูงสุดในรอบ 10 ปี</h2>
+    <p>ระเบียบ 3 ชุดมาพร้อมกัน: CBAM บังคับแล้ว · Climate Change Act อนุมัติแล้ว · ธนาคารเริ่มบังคับ GHG Data<br>โรงงานไทย 71,130 แห่ง มีเพียง 711 รายที่ทำ CFO — ตลาดที่ยังไม่ถูกแตะ 98.5%</p>
+    <div class="intro-meta">
+      <span class="tag tag-red">CBAM: มีผลแล้ว ม.ค. 2026</span>
+      <span class="tag tag-amber">Climate Change Act: อนุมัติ ธ.ค. 2568</span>
+      <span class="tag tag-green">ตลาดที่ปรึกษา: ฿280–560M/ปี</span>
+    </div>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card sc-green"><div class="stat-label">CFO Certified</div><div class="stat-value sv-green">711</div><div class="stat-sub">จาก 71,130 โรงงาน = 1.5%</div></div>
+    <div class="stat-card sc-red"><div class="stat-label">CBAM Exposure</div><div class="stat-value sv-red">฿28B</div><div class="stat-sub">ส่งออก EU ที่โดนผลกระทบ/ปี</div></div>
+    <div class="stat-card sc-amber"><div class="stat-label">T-VER Carbon Price</div><div class="stat-value sv-amber">฿174</div><div class="stat-sub">ต่อ tCO₂ (Q1 FY2025 สูงสุด)</div></div>
+    <div class="stat-card sc-blue"><div class="stat-label">VVB ในไทย</div><div class="stat-value sv-blue">18</div><div class="stat-sub">ทะเบียน TGO ทั้งหมดในประเทศ</div></div>
+  </div>
+
+  <div class="sec-label">3 แรงกดดันที่มาพร้อมกัน</div>
+  <div class="three-col mb-24">
+    <div class="card">
+      <div class="tag tag-red mb-8">บังคับใช้แล้ว</div>
+      <h3>EU CBAM Definitive Phase</h3>
+      <p><strong>ม.ค. 2026:</strong> ต้องยื่น Verified Emissions Data<br><strong>ก.ย. 2027:</strong> ยื่น CBAM Certificate ครั้งแรก<br>ใช้ค่า Default: แพงกว่า Verified <strong>3–17 เท่า</strong><br>ปรับ Default Value +10%→+20%→+30% ทุกปี</p>
+    </div>
+    <div class="card">
+      <div class="tag tag-amber mb-8">อนุมัติแล้ว</div>
+      <h3>Thailand Climate Change Act</h3>
+      <p>คณะรัฐมนตรีอนุมัติ <strong>2 ธ.ค. 2568</strong><br>Carbon Tax <strong>฿200/tCO₂</strong><br>บังคับรายงาน GHG (MRV) สำหรับโรงงานที่ถูกกำหนด<br>บังคับใช้คาดปี <strong>2027</strong></p>
+    </div>
+    <div class="card">
+      <div class="tag tag-blue mb-8">ต่อเนื่อง</div>
+      <h3>ธนาคาร + SET กดดัน ESG</h3>
+      <p>ธนาคาร 8 แห่งเริ่ม Green Finance<br>Green Loan ต้องมี GHG Disclosure<br>SET กำหนด ESG Disclosure บริษัทจดทะเบียน<br>ยังไม่รายงาน: <strong>442 / 900 บริษัท</strong></p>
+    </div>
+  </div>
+
+  <div class="sec-label">สัดส่วนตลาดที่ยังไม่ถูกให้บริการ</div>
+  <div class="two-col mb-24">
+    <div class="card">
+      <h4>Penetration Rate ปัจจุบัน</h4>
+      <div class="bar-row"><div class="bar-name">CFO Certified</div><div class="bar-bg"><div class="bar-fill" style="width:1.5%;background:var(--amber)"></div></div><div class="bar-val sv-amber">1.5%</div></div>
+      <div class="bar-row"><div class="bar-name">CFP Certified</div><div class="bar-bg"><div class="bar-fill" style="width:0.6%;background:var(--amber)"></div></div><div class="bar-val sv-amber">0.6%</div></div>
+      <div class="bar-row"><div class="bar-name">CBAM Ready (TGO)</div><div class="bar-bg"><div class="bar-fill" style="width:8%;background:var(--red)"></div></div><div class="bar-val sv-red">~50 ราย</div></div>
+      <div class="bar-row"><div class="bar-name">Green Industry L3+</div><div class="bar-bg"><div class="bar-fill" style="width:22%;background:var(--blue)"></div></div><div class="bar-val sv-blue">22%</div></div>
+      <div class="bar-row"><div class="bar-name">ตลาดที่เหลืออยู่</div><div class="bar-bg"><div class="bar-fill" style="width:98.5%;background:var(--emerald)"></div></div><div class="bar-val sv-green">98.5%</div></div>
+    </div>
+    <div class="card">
+      <h4>ROI Calculation สำหรับลูกค้า (ใช้ใน Sales Pitch)</h4>
+      <p><strong>โรงงาน Steel ส่งออก EU 5,000 tonne/ปี:</strong></p>
+      <p>ต้นทุน CBAM ถ้าใช้ Default Value: <strong class="sv-red">~฿3,000,000/ปี</strong></p>
+      <p>ต้นทุน CBAM ถ้า Verify Actual: <strong class="sv-green">~฿1,200,000/ปี</strong></p>
+      <p>ประหยัดได้: <strong class="sv-green">฿1,800,000/ปี</strong></p>
+      <p>ค่า Consulting หมอโรงงาน: <strong>฿249,000</strong></p>
+      <div class="alert alert-green" style="margin-top:12px;margin-bottom:0">
+        <strong>ROI = 623% ในปีแรก</strong> — คืนทุนได้จากชิปเมนต์แรก
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════
+     TAB 1: TARGET SEGMENTS
+════════════════════════════════════════ -->
+<div class="section" id="tab1">
+<div class="page-body">
+  <div class="section-intro">
+    <h2>Target Segments</h2>
+    <p>เรียงตาม Urgency — P1 ต้องปิดก่อน เพราะมี Deadline จริงและ Sales Cycle สั้นที่สุด</p>
+  </div>
+
+  <table class="tbl mb-32">
+    <thead><tr>
+      <th>Priority</th><th>กลุ่มลูกค้า</th><th>Trigger หลัก</th><th>บริการที่เสนอ</th><th>ACV (฿)</th><th>Sales Cycle</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="tag tag-red">P1 ด่วนมาก</span></td>
+        <td class="emph">โรงงานส่งออก EU<br><span style="font-size:12px;color:var(--text-muted)">Steel · Aluminum · Cement · Fertilizer</span></td>
+        <td>CBAM บังคับแล้ว ม.ค. 2026<br><span style="font-size:12px;color:var(--red)">ยื่น Certificate ก.ย. 2027</span></td>
+        <td>CBAM Report + CFP + VVB</td>
+        <td class="emph sv-green">250,000–350,000</td>
+        <td><span class="tag tag-red">2–4 สัปดาห์</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-amber">P2 เร่ง</span></td>
+        <td class="emph">Supplier ใน Supply Chain JP/EU<br><span style="font-size:12px;color:var(--text-muted)">Tier-1/2 Automotive, Electronics</span></td>
+        <td>Buyer บังคับ Scope 3 Data<br><span style="font-size:12px;color:var(--amber)">เสี่ยงหลุด PO</span></td>
+        <td>CFO + Net Zero Roadmap</td>
+        <td class="emph sv-green">180,000–280,000</td>
+        <td><span class="tag tag-amber">4–8 สัปดาห์</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-blue">P3 กลาง</span></td>
+        <td class="emph">โรงงานสมัคร Green Loan<br><span style="font-size:12px;color:var(--text-muted)">BOT Green Finance / ESG Bond</span></td>
+        <td>ธนาคาร 8 แห่งบังคับ GHG Data<br><span style="font-size:12px;color:var(--blue)">เงื่อนไขสินเชื่ออัตราดอกเบี้ยพิเศษ</span></td>
+        <td>CFO + VVB Verification</td>
+        <td class="emph sv-green">150,000–220,000</td>
+        <td><span class="tag tag-blue">6–10 สัปดาห์</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-teal">P4 สะสม</span></td>
+        <td class="emph">Green Industry Level-up<br><span style="font-size:12px;color:var(--text-muted)">DIW Level 1 → Level 3/4</span></td>
+        <td>78% ยังอยู่ Level 1<br><span style="font-size:12px;color:var(--teal)">ต้องมี CFO Report เพื่อ Upgrade</span></td>
+        <td>CFO Assessment + Roadmap</td>
+        <td class="emph sv-green">89,000–149,000</td>
+        <td><span class="tag tag-teal">8–12 สัปดาห์</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="sec-label">พฤติกรรมการซื้อของผู้บริหารโรงงานไทย</div>
+  <div class="three-col mb-24">
+    <div class="card">
+      <div class="tag tag-amber mb-8">การตัดสินใจ</div>
+      <h3>เจ้าของคนเดียว = 90%</h3>
+      <p>ไม่มี Committee ไม่มี RFP ไม่มี Tender<br>ตัดสินใจหลังสร้าง <strong>ความเชื่อใจส่วนตัว</strong><br>ลำดับ: เจอหน้า → ทานข้าว → เยี่ยมโรงงาน → ปิด</p>
+    </div>
+    <div class="card">
+      <div class="tag tag-green mb-8">ช่องทางหาข้อมูล</div>
+      <h3>Referral ชนะทุกช่องทาง</h3>
+      <p>เพื่อนโรงงานในนิคมเดียวกัน<br>RM ธนาคาร (สำคัญมากขึ้นเรื่อยๆ)<br>เจ้าหน้าที่ TGO / FTI / DIW<br>ไม่ตอบ Cold Call แบบ Hard Sell</p>
+    </div>
+    <div class="card">
+      <div class="tag tag-red mb-8">Trigger ที่กระตุ้นเร็ว</div>
+      <h3>ตัวเลข THB เท่านั้น</h3>
+      <p>"CBAM Default ทำให้เสียเพิ่ม <strong>฿1.8M/ปี</strong>" → ตัดสินใจเร็ว<br>"ควรทำ ESG เพื่ออนาคต" → ตัดสินใจช้า<br>ต้องคำนวณให้เห็น <strong>ทันที</strong> ตอนนัดแรก</p>
+    </div>
+  </div>
+
+  <div class="alert alert-navy">
+    <strong>Sales Script ที่พิสูจน์แล้ว:</strong><br>
+    "คุณส่งออก [Product] ไป EU ไหมครับ? ตั้งแต่ ม.ค. 2026 EU บังคับแล้วว่าต้องมี Verified Emissions ถ้าใช้ค่า Default ตอนนี้ คาดว่าจะเสียเพิ่มประมาณ [คำนวณสด] บาทต่อปี — ผมช่วยเปลี่ยนเป็น Verified Actual ได้ ซึ่งประหยัดกว่ามาก และค่าบริการ ฿249,000 คืนทุนได้จากชิปเมนต์แรกครับ"
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════
+     TAB 2: COMPETITORS (ข้อมูลจาก Thailand Carbon Services Market Analysis)
+════════════════════════════════════════ -->
+<div class="section" id="tab2">
+<div class="page-body">
+  <div class="section-intro">
+    <h2>ภูมิทัศน์คู่แข่ง & จุดแข็งของเรา</h2>
+    <p>หมอโรงงานคือผู้ให้บริการ Carbon ที่ครบที่สุดในตลาด — มีทั้ง VVB ลงทะเบียน TGO และ Consulting ในองค์กรเดียว<br>ตลาดแบ่งเป็น 4 ประเภท ซึ่งทุกรายมีข้อจำกัด — หมอโรงงานทำได้ครบที่พวกเขาทำไม่ได้</p>
+    <div class="intro-meta">
+      <span class="tag tag-green">หมอโรงงาน: VVB + Consulting ครบ</span>
+      <span class="tag tag-blue">18 VVB ลงทะเบียน TGO</span>
+      <span class="tag tag-amber">CBAM Specialist: 2–3 รายเท่านั้น</span>
+      <span class="tag tag-red">ไม่มีรายใด Combine VVB + CBAM + OSMEP ได้</span>
+    </div>
+  </div>
+
+  <!-- Pricing Tiers Overview Alert -->
+  <div class="alert alert-amber">
+    <strong>ข้อมูลที่ถูกต้องจากตลาดจริง:</strong> ราคาในตลาดไทยแบ่ง 4 Tier ชัดเจน — Tier 1 (Big Consultancy ฿50,000–250,000+) · Tier 2 (VVB/Certifier ฿3,000–15,000+ ต่อ man-day) · Tier 3 (Local Boutique ฿1,000–10,000) · Tier 4 (SaaS ฿100–1,000/เดือน) — ดูรายละเอียดใน Tab Pricing Tiers
+  </div>
+
+  <!-- 4 CATEGORY MAP -->
+  <div class="sec-label">4 ประเภทผู้เล่นในตลาด Carbon Services ไทย</div>
+
+  <!-- TIER 1: VVB/CERTIFIERS -->
+  <div style="margin-bottom:24px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+      <div style="background:var(--navy);color:var(--emerald);font-size:11px;font-weight:700;font-family:var(--mono);padding:4px 10px;border-radius:4px">TIER 2</div>
+      <div style="font-size:15px;font-weight:700;color:var(--navy)">Accredited Certifiers & VVB — ผู้ตรวจสอบรับรอง</div>
+      <div style="font-size:12px;color:var(--text-muted);font-family:var(--mono)">ห้ามทำ Consulting ในโปรเจกต์เดียวกัน (กฎ ISO impartiality)</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+      <div class="comp-card" style="border-top:3px solid #185FA5">
+        <div class="comp-name">SGS (Thailand) Limited</div>
+        <div class="comp-type">VVB — ลงทะเบียน TGO · Global Leader</div>
+        <div class="comp-row"><span>VVB Scope</span><span style="color:var(--emerald-d);font-weight:600">16 Sectors (สูงสุด)</span></div>
+        <div class="comp-row"><span>บริการหลัก</span><span>CFO, CFP, T-VER Validation</span></div>
+        <div class="comp-row"><span>ราคา Verification</span><span style="color:var(--amber)">฿109,140+ (mid-size)</span></div>
+        <div class="comp-row"><span>CBAM Specific</span><span style="color:var(--amber)">ISO 14067 มี — แพง</span></div>
+        <div class="comp-row"><span>จุดอ่อน</span><span style="color:var(--red)">ให้ Consulting ไม่ได้</span></div>
+        <div style="margin-top:10px;font-size:12px;color:var(--text-muted);line-height:1.5">Brand equity สูงมาก แต่ Structural Constraint คือ <strong>ให้บริการ Consulting ไม่ได้</strong> — ลูกค้าต้องหา Consultant ก่อนแล้วค่อยมา SGS Verify</div>
+      </div>
+      <div class="comp-card" style="border-top:3px solid #185FA5">
+        <div class="comp-name">Bureau Veritas / MASCI</div>
+        <div class="comp-type">VVB — ลงทะเบียน TGO · Industrial Focus</div>
+        <div class="comp-row"><span>BV VVB Scope</span><span>Manufacturing, Energy, Heavy</span></div>
+        <div class="comp-row"><span>MASCI VVB</span><span>Energy, Chemicals, Waste, Transport</span></div>
+        <div class="comp-row"><span>ราคา</span><span style="color:var(--amber)">Man-day based</span></div>
+        <div class="comp-row"><span>CBAM</span><span style="color:var(--red)">ไม่ใช่บริการหลัก</span></div>
+        <div class="comp-row"><span>จุดอ่อน</span><span style="color:var(--red)">ให้ Consulting ไม่ได้</span></div>
+        <div style="margin-top:10px;font-size:12px;color:var(--text-muted);line-height:1.5">MASCI เป็นไทย มี Network ดี แต่ Range Sector แคบกว่า SGS ทั้งคู่ขาด CBAM-specific offering</div>
+      </div>
+      <div class="comp-card" style="border-top:3px solid #185FA5">
+        <div class="comp-name">BSI (Thailand)</div>
+        <div class="comp-type">Certifier + Standard Setter · Training Focus</div>
+        <div class="comp-row"><span>VVB TGO</span><span style="color:var(--red)">ไม่ได้ลงทะเบียน T-VER</span></div>
+        <div class="comp-row"><span>บริการหลัก</span><span>ISO 14064-1, ISO 14067, ISO 14068-1</span></div>
+        <div class="comp-row"><span>จุด Focus</span><span>Training, LCA Playbooks, Lead Verifier</span></div>
+        <div class="comp-row"><span>CBAM</span><span style="color:var(--red)">ไม่มี CBAM offering ชัดเจน</span></div>
+        <div style="margin-top:10px;font-size:12px;color:var(--text-muted);line-height:1.5">เน้น Training มาก มี Lead Verifier Course — ไม่ใช่ผู้เล่น CBAM และไม่ได้ Register T-VER VVB กับ TGO</div>
+      </div>
+    </div>
+
+    <!-- หมอโรงงาน CREDENTIALS CARD -->
+    <div style="margin-top:20px;background:var(--emerald-dim);border:2px solid var(--emerald);border-radius:var(--r-xl);padding:4px 16px">
+      <div style="display:flex;align-items:center;gap:8px;padding:10px 0 6px">
+        <div style="font-size:10px;font-weight:800;font-family:var(--mono);background:var(--emerald);color:var(--navy);padding:3px 8px;border-radius:4px;flex-shrink:0">★ เรา</div>
+        <div style="font-size:15px;font-weight:700;color:var(--navy)">หมอโรงงาน (หน่วยตรวจสอบความใช้ได้และทวนสอบก๊าซเรือนกระจก)</div>
+        <div style="font-size:12px;color:var(--text-muted);font-family:var(--mono);margin-left:auto">VVB + Consulting · Full Service · Thai SME First</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:4px;margin-bottom:0">
+      <div class="card" style="border-top:3px solid var(--emerald)">
+        <div style="font-size:15px;font-weight:700;color:var(--emerald-d);margin-bottom:10px">Credentials หมอโรงงาน</div>
+        <div class="comp-row"><span>T-VER VVB Scope</span><span style="color:var(--emerald-d);font-weight:600">7 Sectors</span></div>
+        <div class="comp-row"><span>CFO VVB Scope</span><span style="color:var(--emerald-d);font-weight:600">5 Sectors</span></div>
+        <div class="comp-row"><span>CBAM Embedded</span><span style="color:var(--emerald-d);font-weight:600">✓ Hero Product</span></div>
+        <div class="comp-row"><span>CFP ISO 14067</span><span style="color:var(--emerald-d);font-weight:600">✓ ครบ</span></div>
+        <div class="comp-row"><span>ISO 14083 / ISCC</span><span style="color:var(--emerald-d);font-weight:600">✓ มี</span></div>
+        <div class="comp-row"><span>Digital Platform</span><span style="color:var(--emerald-d);font-weight:600">✓ Carbon Management</span></div>
+        <div class="comp-row"><span>ลูกค้า Reference</span><span>OR, GC, GPSC, Thaioil, IRPC, Meiji, FB Battery, SC Asset, Alucon, After You, TOPY และอื่นๆ >20 ราย</span></div>
+        <div style="margin-top:10px;padding:8px;background:var(--emerald-dim);border-radius:6px;font-size:12px;color:var(--emerald-d);line-height:1.6">
+          <strong>จุดแข็ง:</strong> VVB + Consulting + Digital Platform ครบในที่เดียว — เดียวในตลาดที่ทำได้ทั้งหมด พร้อม OSMEP BDS Navigator สำหรับ SME
+        </div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--emerald)">
+        <div style="font-size:13px;font-weight:700;color:var(--emerald-d);margin-bottom:10px">บริการครบของหมอโรงงาน</div>
+        <div style="font-size:13px;color:var(--text-sub)">
+          <div style="padding:5px 0;border-bottom:1px solid var(--line);display:flex;gap:6px"><span style="color:var(--navy);font-weight:700;flex-shrink:0">●</span><span>CFO (ISO 14064-1) — Consulting + VVB</span></div>
+          <div style="padding:5px 0;border-bottom:1px solid var(--line);display:flex;gap:6px"><span style="color:var(--navy);font-weight:700;flex-shrink:0">●</span><span>CFP (ISO 14067) — Consulting + VVB</span></div>
+          <div style="padding:5px 0;border-bottom:1px solid var(--line);display:flex;gap:6px"><span style="color:var(--red);font-weight:700;flex-shrink:0">●</span><span><strong>Embedded Emissions / CBAM</strong> — Hero</span></div>
+          <div style="padding:5px 0;border-bottom:1px solid var(--line);display:flex;gap:6px"><span style="color:var(--amber);font-weight:700;flex-shrink:0">●</span><span>Carbon Neutral Event</span></div>
+          <div style="padding:5px 0;border-bottom:1px solid var(--line);display:flex;gap:6px"><span style="color:var(--amber);font-weight:700;flex-shrink:0">●</span><span>Green Logistics (ISO 14083)</span></div>
+          <div style="padding:5px 0;border-bottom:1px solid var(--line);display:flex;gap:6px"><span style="color:var(--amber);font-weight:700;flex-shrink:0">●</span><span>ISCC Certification</span></div>
+          <div style="padding:5px 0;border-bottom:1px solid var(--line);display:flex;gap:6px"><span style="color:var(--emerald-d);font-weight:700;flex-shrink:0">●</span><span>T-VER / VERRA / Gold Standard / CORSIA</span></div>
+          <div style="padding:5px 0;border-bottom:1px solid var(--line);display:flex;gap:6px"><span style="color:var(--emerald-d);font-weight:700;flex-shrink:0">●</span><span>REC (I-REC Standard)</span></div>
+          <div style="padding:5px 0;border-bottom:1px solid var(--line);display:flex;gap:6px"><span style="color:var(--blue);font-weight:700;flex-shrink:0">●</span><span>Net Zero Pathway (ISO 14068)</span></div>
+          <div style="padding:5px 0;border-bottom:1px solid var(--line);display:flex;gap:6px"><span style="color:var(--blue);font-weight:700;flex-shrink:0">●</span><span>Green Finance / ESG Strategy</span></div>
+          <div style="padding:5px 0;display:flex;gap:6px"><span style="color:var(--blue);font-weight:700;flex-shrink:0">●</span><span>Digital Carbon Management Platform</span></div>
+        </div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--emerald)">
+        <div style="font-size:13px;font-weight:700;color:var(--emerald-d);margin-bottom:10px">ข้อได้เปรียบเหนือคู่แข่งทุกราย</div>
+        <div style="font-size:13px;color:var(--text-sub)">
+          <div style="padding:6px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--emerald-d);flex-shrink:0;font-weight:700">✦</span><span><strong>VVB ครบ + Consulting ในที่เดียว</strong> — SGS/BV ทำแค่ Verify ไม่ได้ Consult</span></div>
+          <div style="padding:6px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--emerald-d);flex-shrink:0;font-weight:700">✦</span><span><strong>CBAM Fast-Track Hero Product</strong> — คู่แข่งไม่มี Go-to-market CBAM ชัดเจน</span></div>
+          <div style="padding:6px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--emerald-d);flex-shrink:0;font-weight:700">✦</span><span><strong>OSMEP BDS 50%</strong> — ไม่มีรายใดช่วย SME ยื่นขอ Subsidy อย่างเป็นระบบ</span></div>
+          <div style="padding:6px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--emerald-d);flex-shrink:0;font-weight:700">✦</span><span><strong>Thai-language + Factory-visit</strong> — ทุก TIC Firm พูดภาษา Boardroom English</span></div>
+          <div style="padding:6px 0;display:flex;gap:8px"><span style="color:var(--emerald-d);flex-shrink:0;font-weight:700">✦</span><span><strong>Tier 3 Pricing + Enterprise Quality</strong> — คุณภาพระดับ PTT ราคาที่ SME จ่ายได้</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIER 1: BIG CONSULTANCY -->
+  <div style="margin-bottom:24px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+      <div style="background:var(--navy);color:#FBBF24;font-size:11px;font-weight:700;font-family:var(--mono);padding:4px 10px;border-radius:4px">TIER 1</div>
+      <div style="font-size:15px;font-weight:700;color:var(--navy)">Global Strategy & Management Consultancies</div>
+      <div style="font-size:12px;color:var(--text-muted);font-family:var(--mono)">Enterprise & Board Level · ฿50,000–250,000+ USD</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="comp-card" style="border-top:3px solid var(--amber)">
+        <div class="comp-name">PwC Thailand</div>
+        <div class="comp-type">Global Management Consultancy · Financial Strategy</div>
+        <div class="comp-row"><span>จุดแข็ง</span><span>Financed Emissions, TCFD, Tax Incentives, CDP</span></div>
+        <div class="comp-row"><span>Target</span><span>Banking, SET Listed, Oil & Gas, Retail</span></div>
+        <div class="comp-row"><span>VVB Status</span><span style="color:var(--red)">ไม่ใช่ VVB</span></div>
+        <div class="comp-row"><span>CBAM</span><span style="color:var(--red)">ไม่ใช่ offering หลัก</span></div>
+        <div class="comp-row"><span>SME Focus</span><span style="color:var(--red)">ไม่มี — ราคาสูงเกิน</span></div>
+        <div style="margin-top:10px;font-size:12px;color:var(--text-muted)">จุดอ่อน: ราคาสูงมาก, Core คือ Financial Risk — ไม่ใช่ Physical Decarbonization, ไม่ช่วย SME</div>
+      </div>
+      <div class="comp-card" style="border-top:3px solid var(--amber)">
+        <div class="comp-name">ERM (Thailand)</div>
+        <div class="comp-type">Global Sustainability Consultancy · Engineering Focus</div>
+        <div class="comp-row"><span>จุดแข็ง</span><span>Deep LCA, Process Heat, Capital Project Advisory</span></div>
+        <div class="comp-row"><span>Target</span><span>Oil & Gas, Petrochemicals, Power, Mining</span></div>
+        <div class="comp-row"><span>VVB Status</span><span style="color:var(--red)">ไม่ใช่ VVB</span></div>
+        <div class="comp-row"><span>CBAM</span><span style="color:var(--red)">ไม่ใช่ offering หลัก</span></div>
+        <div class="comp-row"><span>SME Focus</span><span style="color:var(--red)">ไม่มี</span></div>
+        <div style="margin-top:10px;font-size:12px;color:var(--text-muted)">ERM แข็งที่สุดด้าน Engineering + Hard-to-abate sectors แต่ราคาสูงมาก ไม่มี CBAM offering ชัดเจน</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIER 3: LOCAL BOUTIQUES -->
+  <div style="margin-bottom:24px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+      <div style="background:var(--navy);color:var(--emerald);font-size:11px;font-weight:700;font-family:var(--mono);padding:4px 10px;border-radius:4px">TIER 3</div>
+      <div style="font-size:15px;font-weight:700;color:var(--navy)">Local Specialized Boutiques — คู่แข่งโดยตรงที่สุด</div>
+      <div style="font-size:12px;color:var(--text-muted);font-family:var(--mono)">฿1,000–10,000 ต่อ Report</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+      <div class="comp-card" style="border-top:3px solid var(--emerald)">
+        <div class="comp-name">ESG Pro Thai</div>
+        <div class="comp-type">Local Boutique · Mid-market focus</div>
+        <div class="comp-row"><span>บริการ</span><span>CFO, CFP, IFRS S1/S2, Energy Audits, Net Zero</span></div>
+        <div class="comp-row"><span>จุดเด่น</span><span style="color:var(--amber)">Hotel sector + Engineering</span></div>
+        <div class="comp-row"><span>CBAM</span><span style="color:var(--red)">ไม่ชัดเจน</span></div>
+        <div class="comp-row"><span>VVB</span><span style="color:var(--red)">ไม่ใช่ VVB</span></div>
+        <div class="comp-row"><span>จุดอ่อน</span><span style="color:var(--red)">เน้น Hospitality มาก</span></div>
+      </div>
+      <div class="comp-card" style="border-top:3px solid var(--emerald)">
+        <div class="comp-name">CarbonSmith (Thailand)</div>
+        <div class="comp-type">Local Boutique · TGO Registered Consultant</div>
+        <div class="comp-row"><span>บริการ</span><span>CFO, T-VER, REC Trading, Plastics/Electronics LCA</span></div>
+        <div class="comp-row"><span>จุดเด่น</span><span style="color:var(--emerald-d)">TGO Registered</span></div>
+        <div class="comp-row"><span>CBAM</span><span style="color:var(--red)">ไม่ชัดเจน</span></div>
+        <div class="comp-row"><span>VVB</span><span style="color:var(--red)">ไม่ใช่ VVB</span></div>
+        <div class="comp-row"><span>จุดอ่อน</span><span style="color:var(--red)">Plastics/Electronics focus แคบ</span></div>
+      </div>
+      <div class="comp-card" style="border-top:3px solid var(--red);border:2px solid var(--red)">
+        <div style="font-size:10px;font-weight:700;font-family:var(--mono);color:var(--red);margin-bottom:6px;text-transform:uppercase">คู่แข่งโดยตรงที่สุด</div>
+        <div class="comp-name">Green & Blue Planet Solutions</div>
+        <div class="comp-type">CBAM Specialist · Japanese-Thai JV</div>
+        <div class="comp-row"><span>บริการ</span><span>CFO, CBAM Advisory, I-REC, ISCC, EcoVadis</span></div>
+        <div class="comp-row"><span>CBAM</span><span style="color:var(--red)">มี Case Study Steel — คู่แข่งตรง</span></div>
+        <div class="comp-row"><span>VVB</span><span style="color:var(--red)">ไม่ใช่ VVB</span></div>
+        <div class="comp-row"><span>Brand TH</span><span style="color:var(--amber)">ต่ำ แต่กำลังโต</span></div>
+        <div class="comp-row"><span>Social Media</span><span style="color:var(--red)">อ่อนมาก</span></div>
+        <div style="margin-top:10px;font-size:12px;color:var(--red);background:var(--red-dim);padding:8px;border-radius:6px">ต้องเร่งเข้าตลาดก่อน GBP สร้าง Brand — window กำลังปิดลง</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIER 4: SAAS + ACADEMIC -->
+  <div style="margin-bottom:28px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+      <div style="background:var(--navy);color:#60A5FA;font-size:11px;font-weight:700;font-family:var(--mono);padding:4px 10px;border-radius:4px">TIER 4</div>
+      <div style="font-size:15px;font-weight:700;color:var(--navy)">Climate-Tech SaaS + Academic Centers</div>
+      <div style="font-size:12px;color:var(--text-muted);font-family:var(--mono)">Emerging · SME-focused · ฿100–1,000/เดือน</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+      <div class="comp-card" style="border-top:3px solid var(--blue)">
+        <div class="comp-name">Carbonwize</div>
+        <div class="comp-type">Climate-Tech SaaS · SET Partnership</div>
+        <div class="comp-row"><span>จุดเด่น</span><span style="color:var(--emerald-d)">Partner กับ SET Carbon</span></div>
+        <div class="comp-row"><span>บริการ</span><span>Automated Carbon Accounting, SME</span></div>
+        <div class="comp-row"><span>ราคา</span><span>Subscription ต่ำ</span></div>
+        <div class="comp-row"><span>จุดอ่อน</span><span style="color:var(--red)">Verification ยัง Nascent</span></div>
+      </div>
+      <div class="comp-card" style="border-top:3px solid var(--blue)">
+        <div class="comp-name">V-Green KU (Kasetsart)</div>
+        <div class="comp-type">Academic Center · TGO Registered</div>
+        <div class="comp-row"><span>จุดเด่น</span><span style="color:var(--emerald-d)">TGO Registered Consultant</span></div>
+        <div class="comp-row"><span>บริการ</span><span>CFP, LCA, Agro-food, Textiles</span></div>
+        <div class="comp-row"><span>จุดอ่อน</span><span style="color:var(--red)">Academic — ไม่ Commercial</span></div>
+      </div>
+      <div class="comp-card" style="border-top:3px solid var(--blue)">
+        <div class="comp-name">Active Consultants (Thailand)</div>
+        <div class="comp-type">Niche VVB · Forestry + Agriculture</div>
+        <div class="comp-row"><span>VVB</span><span style="color:var(--emerald-d)">Active VVB (TGO)</span></div>
+        <div class="comp-row"><span>Sector</span><span>Energy, Forestry, Agriculture</span></div>
+        <div class="comp-row"><span>CBAM</span><span style="color:var(--red)">ไม่เกี่ยวข้อง</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPETITIVE MATRIX -->
+  <div class="sec-label">Competitive Matrix — เปรียบเทียบบริการ Carbon</div>
+  <div style="overflow-x:auto;margin-bottom:28px">
+    <table class="tbl">
+      <thead><tr>
+        <th>บริษัท</th><th>CFO ✓</th><th>CFP ✓</th><th>T-VER VVB</th><th>CBAM</th><th>Green Logistics / ISCC</th><th>Net Zero / ESG</th><th>Digital Platform</th><th>SME ไทย</th>
+      </tr></thead>
+      <tbody>
+        <tr style="background:var(--emerald-dim)">
+          <td class="emph" style="color:var(--emerald-d)">★ หมอโรงงาน (เรา)</td>
+          <td style="color:var(--emerald-d);font-weight:600">✓ Consulting + VVB 5 Scopes</td>
+          <td style="color:var(--emerald-d);font-weight:600">✓ Consulting + VVB ครบ</td>
+          <td style="color:var(--emerald-d);font-weight:600">✓ VVB 7 Sectors</td>
+          <td style="color:var(--emerald-d);font-weight:600">✓ Hero Product</td>
+          <td style="color:var(--emerald-d);font-weight:600">✓ ISO 14083 + ISCC</td>
+          <td style="color:var(--emerald-d);font-weight:600">✓ Net Zero + Green Finance</td>
+          <td style="color:var(--emerald-d);font-weight:600">✓ Carbon Platform</td>
+          <td style="color:var(--emerald-d);font-weight:600">✓ Thai-first + OSMEP</td>
+        </tr>
+        <tr><td class="emph">SGS Thailand</td><td style="color:var(--emerald-d);font-weight:600">✓ Verify</td><td style="color:var(--emerald-d);font-weight:600">✓ Verify</td><td style="color:var(--emerald-d);font-weight:600">✓ Active 16 Scopes</td><td style="color:var(--amber)">ISO 14067 มี</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗ (VVB ทำไม่ได้)</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td></tr>
+        <tr><td class="emph">Bureau Veritas</td><td style="color:var(--emerald-d);font-weight:600">✓ Verify</td><td style="color:var(--amber)">จำกัด</td><td style="color:var(--emerald-d);font-weight:600">✓ Active</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td></tr>
+        <tr><td class="emph">BSI Thailand</td><td style="color:var(--emerald-d);font-weight:600">✓ Verify</td><td style="color:var(--emerald-d);font-weight:600">✓ Verify</td><td style="color:var(--red)">✗ ไม่ Register</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--amber)">Standard focus</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td></tr>
+        <tr><td class="emph">MASCI</td><td style="color:var(--emerald-d);font-weight:600">✓ Verify</td><td style="color:var(--emerald-d);font-weight:600">✓ Verify</td><td style="color:var(--emerald-d);font-weight:600">✓ Active</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--amber)">บางส่วน</td></tr>
+        <tr><td class="emph">PwC Thailand</td><td style="color:var(--emerald-d);font-weight:600">✓ Advisory</td><td style="color:var(--amber)">จำกัด</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">ไม่ใช่หลัก</td><td style="color:var(--red)">✗</td><td style="color:var(--emerald-d);font-weight:600">✓ Enterprise</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td></tr>
+        <tr><td class="emph">ERM Thailand</td><td style="color:var(--emerald-d);font-weight:600">✓ Advisory</td><td style="color:var(--emerald-d);font-weight:600">✓ Deep LCA</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">ไม่ใช่หลัก</td><td style="color:var(--red)">✗</td><td style="color:var(--emerald-d);font-weight:600">✓ Engineering</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td></tr>
+        <tr><td class="emph">ESG Pro Thai</td><td style="color:var(--emerald-d);font-weight:600">✓</td><td style="color:var(--emerald-d);font-weight:600">✓</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--emerald-d);font-weight:600">✓ IFRS S1/S2</td><td style="color:var(--red)">✗</td><td style="color:var(--emerald-d);font-weight:600">✓ Hospitality</td></tr>
+        <tr><td class="emph">CarbonSmith</td><td style="color:var(--emerald-d);font-weight:600">✓</td><td style="color:var(--emerald-d);font-weight:600">✓ Plastics</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--amber)">จำกัด</td><td style="color:var(--red)">✗</td><td style="color:var(--emerald-d);font-weight:600">✓</td></tr>
+        <tr><td class="emph">GBP (Green&Blue Planet)</td><td style="color:var(--emerald-d);font-weight:600">✓</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--red);font-weight:600">✓ Case Study</td><td style="color:var(--amber)">ISCC บางส่วน</td><td style="color:var(--amber)">จำกัด</td><td style="color:var(--red)">✗</td><td style="color:var(--amber)">บางส่วน</td></tr>
+        <tr><td class="emph">Carbonwize (SaaS)</td><td style="color:var(--blue);font-weight:600">✓ Automated</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--blue);font-weight:600">✓ SaaS</td><td style="color:var(--emerald-d);font-weight:600">✓ SME</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- STRUCTURAL GAPS -->
+  <div class="sec-label">ช่องว่างเชิงโครงสร้างที่หมอโรงงานต้องเข้าครอง</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div class="card" style="border-left:4px solid var(--emerald)">
+      <h4 style="color:var(--emerald-d);margin-bottom:12px">✦ ช่องว่างด้านบริการ (Service Gaps)</h4>
+      <ul style="list-style:none;font-size:14px;color:var(--text-sub)">
+        <li style="padding:9px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--emerald);font-weight:700;flex-shrink:0">G1</span><span><strong>CBAM + CFO + CFP Bundle:</strong> ไม่มีใครบันเดิลครบในที่เดียวสำหรับ SME ราคาเข้าถึงได้</span></li>
+        <li style="padding:9px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--emerald);font-weight:700;flex-shrink:0">G2</span><span><strong>VVB Coordination:</strong> ลูกค้าต้องหา Consultant + VVB แยกกัน — หมอโรงงานเป็น Single Point of Contact ได้</span></li>
+        <li style="padding:9px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--emerald);font-weight:700;flex-shrink:0">G3</span><span><strong>OSMEP BDS Navigation:</strong> ไม่มีรายใดช่วยลูกค้ายื่นขอเงินอุดหนุน 50% อย่างเป็นระบบ</span></li>
+        <li style="padding:9px 0;display:flex;gap:8px"><span style="color:var(--emerald);font-weight:700;flex-shrink:0">G4</span><span><strong>Supply Chain Tier 2/3:</strong> CBAM-exposed companies ต้องการ Scope 3 data จาก Supplier แต่ไม่มีใครช่วย Supplier เตรียม</span></li>
+      </ul>
+    </div>
+    <div class="card" style="border-left:4px solid var(--emerald)">
+      <h4 style="color:var(--emerald-d);margin-bottom:12px">✦ ช่องว่างด้านการตลาด (Market Gaps)</h4>
+      <ul style="list-style:none;font-size:14px;color:var(--text-sub)">
+        <li style="padding:9px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--emerald);font-weight:700;flex-shrink:0">M1</span><span><strong>Thai-language + Factory-floor Ready:</strong> ทุก TIC Firms พูดภาษา Boardroom English เท่านั้น</span></li>
+        <li style="padding:9px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--emerald);font-weight:700;flex-shrink:0">M2</span><span><strong>Free Carbon Scorecard:</strong> ไม่มีรายใดใช้ Free Assessment เป็น Lead Magnet อย่างจริงจัง</span></li>
+        <li style="padding:9px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--emerald);font-weight:700;flex-shrink:0">M3</span><span><strong>Facebook + LINE Education:</strong> TIC Firms ไม่มี Social Media Strategy — ช่อง CBAM education ยังว่างอยู่</span></li>
+        <li style="padding:9px 0;display:flex;gap:8px"><span style="color:var(--emerald);font-weight:700;flex-shrink:0">M4</span><span><strong>ROI-first Messaging:</strong> ทุกรายพูดเรื่อง Compliance — ไม่มีใครพูดว่า "ประหยัดได้ ฿X จากชิปเมนต์แรก"</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert alert-navy" style="margin-top:20px">
+    <strong>Positioning Statement หมอโรงงาน:</strong><br>
+    "หมอโรงงานคือผู้ให้บริการ Carbon ที่ครบที่สุดในตลาดไทย — มีทั้ง VVB ลงทะเบียน TGO (7 Scopes T-VER, 5 Scopes CFO) และ Consulting ในองค์กรเดียวกัน ครอบคลุมตั้งแต่ CFO, CFP, CBAM, Green Logistics, ISCC, T-VER, Net Zero, ถึง Green Finance<br><br>
+    ไม่มีรายใดในตลาดที่ทำได้ครบเท่านี้ในราคา Tier 3 ที่ SME เข้าถึงได้ — พร้อม OSMEP BDS Navigator ที่ลดต้นทุนลง 50% ทันที"
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════
+     TAB 3: PRICING TIERS (จากข้อมูลตลาดจริง)
+════════════════════════════════════════ -->
+<div class="section" id="tab3">
+<div class="page-body">
+  <div class="section-intro">
+    <h2>Pricing Tiers — ราคาตลาด Carbon Services ไทย</h2>
+    <p>ข้อมูลจาก Thailand Carbon Services Market Analysis 2026<br>ตลาดแบ่ง 4 Tier ชัดเจน — หมอโรงงานอยู่ใน Tier 3 ซึ่งเป็น Sweet Spot สำหรับ SME</p>
+  </div>
+
+  <!-- 4 TIER CARDS -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px">
+    <div class="card" style="border-top:4px solid var(--red)">
+      <div style="font-size:10px;font-weight:700;font-family:var(--mono);color:var(--red);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Tier 1 — Premium</div>
+      <div style="font-size:22px;font-weight:700;color:var(--red);font-family:var(--mono);margin-bottom:4px">$50k–250k+</div>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px">฿1.8M–9M+ USD</div>
+      <div style="font-size:13px;color:var(--text-sub);margin-bottom:8px"><strong>ผู้เล่น:</strong> PwC, ERM, Deloitte</div>
+      <div style="font-size:13px;color:var(--text-sub);margin-bottom:8px"><strong>รูปแบบ:</strong> Long-term Retainer, Capital Project Advisory</div>
+      <div style="font-size:13px;color:var(--text-sub)"><strong>ลูกค้า:</strong> Enterprise, SET Listed, MNC, Financial Institutions</div>
+      <div style="margin-top:10px;padding:8px;background:var(--red-dim);border-radius:6px;font-size:12px;color:var(--red)">ราคาสูงเกินไปสำหรับ SME ไทย — ไม่ใช่คู่แข่งตรง</div>
+    </div>
+    <div class="card" style="border-top:4px solid var(--amber)">
+      <div style="font-size:10px;font-weight:700;font-family:var(--mono);color:var(--amber);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Tier 2 — Assurance</div>
+      <div style="font-size:22px;font-weight:700;color:var(--amber);font-family:var(--mono);margin-bottom:4px">฿3,000–15,000+</div>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px">ต่อ Man-day · Verification only</div>
+      <div style="font-size:13px;color:var(--text-sub);margin-bottom:8px"><strong>ผู้เล่น:</strong> SGS, BSI, BV, MASCI</div>
+      <div style="font-size:13px;color:var(--text-sub);margin-bottom:8px"><strong>ตัวอย่างจริง:</strong> CFO Verification mid-size = ฿109,140</div>
+      <div style="font-size:13px;color:var(--text-sub)"><strong>หมายเหตุ:</strong> OSMEP อุดหนุน 50% สำหรับ SME</div>
+      <div style="margin-top:10px;padding:8px;background:var(--amber-dim);border-radius:6px;font-size:12px;color:var(--amber)">Verification เท่านั้น — ไม่ให้ Consulting ได้ (กฎ ISO)</div>
+    </div>
+    <div class="card" style="border-top:4px solid var(--emerald);border:2px solid var(--emerald)">
+      <div style="background:var(--emerald);color:var(--navy);font-size:10px;font-weight:800;font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;padding:3px 8px;border-radius:4px;display:inline-block;margin-bottom:8px">Tier 3 — Sweet Spot ★</div>
+      <div style="font-size:22px;font-weight:700;color:var(--emerald-d);font-family:var(--mono);margin-bottom:4px">฿1,000–10,000</div>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px">ต่อ Report/Project</div>
+      <div style="font-size:13px;color:var(--text-sub);margin-bottom:8px"><strong>ผู้เล่น:</strong> ESG Pro Thai, CarbonSmith, GBP, <strong style="color:var(--emerald-d)">หมอโรงงาน</strong></div>
+      <div style="font-size:13px;color:var(--text-sub);margin-bottom:8px"><strong>บริการ:</strong> Consulting ครบวงจร + Coordinate VVB</div>
+      <div style="font-size:13px;color:var(--text-sub)"><strong>ACV จริง:</strong> ฿89,000–350,000 (bundle)</div>
+      <div style="margin-top:10px;padding:8px;background:var(--emerald-dim);border-radius:6px;font-size:12px;color:var(--emerald-d)">94% Large-cap report แต่ &lt;48% Small-cap — demand สูงมาก</div>
+    </div>
+    <div class="card" style="border-top:4px solid var(--blue)">
+      <div style="font-size:10px;font-weight:700;font-family:var(--mono);color:var(--blue);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Tier 4 — Digital SaaS</div>
+      <div style="font-size:22px;font-weight:700;color:var(--blue);font-family:var(--mono);margin-bottom:4px">฿3,600–36,000</div>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px">ต่อปี ($100–1,000/เดือน)</div>
+      <div style="font-size:13px;color:var(--text-sub);margin-bottom:8px"><strong>ผู้เล่น:</strong> Carbonwize, Planet C</div>
+      <div style="font-size:13px;color:var(--text-sub);margin-bottom:8px"><strong>บริการ:</strong> Automated Calculation เท่านั้น</div>
+      <div style="font-size:13px;color:var(--text-sub)"><strong>ข้อจำกัด:</strong> ไม่ผ่าน TGO Verification ได้โดยลำพัง</div>
+      <div style="margin-top:10px;padding:8px;background:var(--blue-dim);border-radius:6px;font-size:12px;color:var(--blue)">Emerging — ยังไม่ integrate กับ TGO Verification process ได้จริง</div>
+    </div>
+  </div>
+
+  <!-- PRICING DETAIL TABLE -->
+  <div class="sec-label">ราคาจริงของบริการแต่ละประเภท</div>
+  <table class="tbl mb-24">
+    <thead><tr><th>บริการ</th><th>ตลาด Min</th><th>ตลาด Max</th><th>หมอโรงงาน</th><th>หลัง OSMEP 50%</th><th>Tier</th></tr></thead>
+    <tbody>
+      <tr><td class="emph">CFO Consulting + Preparation (Simple)</td><td>฿80,000</td><td>฿150,000</td><td class="emph sv-green">฿89,000–129,000</td><td style="color:var(--teal)">฿45,000–64,500</td><td><span class="tag tag-green" style="font-size:10px">Tier 3</span></td></tr>
+      <tr><td class="emph">CFO Consulting + Preparation (Manufacturing)</td><td>฿120,000</td><td>฿300,000</td><td class="emph sv-green">฿149,000–249,000</td><td style="color:var(--teal)">฿75,000–124,500</td><td><span class="tag tag-green" style="font-size:10px">Tier 3</span></td></tr>
+      <tr><td class="emph">CFP per Product (LCA)</td><td>฿50,000</td><td>฿200,000</td><td class="emph sv-green">฿69,000–149,000</td><td style="color:var(--teal)">฿35,000–74,500</td><td><span class="tag tag-green" style="font-size:10px">Tier 3</span></td></tr>
+      <tr><td class="emph">CBAM Embedded Emissions + Report</td><td>฿150,000</td><td>฿500,000+</td><td class="emph sv-green">฿179,000–349,000</td><td style="color:var(--teal)">฿90,000–174,500</td><td><span class="tag tag-green" style="font-size:10px">Tier 3</span></td></tr>
+      <tr><td class="emph">VVB Verification (Coordinate + Pass-through)</td><td>฿109,140</td><td>฿300,000+</td><td class="emph" style="color:var(--amber)">Pass-through + coordination fee</td><td>—</td><td><span class="tag tag-amber" style="font-size:10px">Tier 2</span></td></tr>
+      <tr><td class="emph">Training Workshop per person</td><td>฿15,000</td><td>฿50,000</td><td class="emph sv-green">฿25,000–35,000</td><td>—</td><td><span class="tag tag-green" style="font-size:10px">Tier 3</span></td></tr>
+      <tr><td class="emph">Carbon Readiness Scorecard</td><td>฿0</td><td>฿35,000</td><td class="emph" style="color:var(--blue)">ฟรี 100%</td><td>—</td><td><span class="tag tag-blue" style="font-size:10px">Lead Magnet</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- OSMEP BDS EXPLANATION -->
+  <div class="sec-label">OSMEP BDS — อาวุธลับในการปิดการขาย</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div class="card" style="border-left:4px solid var(--emerald)">
+      <h4>OSMEP BDS คืออะไร?</h4>
+      <p>โครงการ Business Development Services (BDS) ของ <strong>สำนักงานส่งเสริม SME (OSMEP)</strong> — ให้เงินอุดหนุน <strong>50% ของค่าที่ปรึกษา</strong> สูงสุด ฿200,000 ต่อราย</p>
+      <p>SME ส่วนใหญ่ <strong>ไม่รู้ว่ามีโครงการนี้</strong> — การที่หมอโรงงานช่วยยื่น = ลดราคาได้ทันที 50% ทำให้ Objection เรื่องราคาหมดไป</p>
+      <div style="background:var(--emerald-dim);border-radius:8px;padding:12px;margin-top:10px">
+        <div style="font-size:13px;color:var(--emerald-d);font-weight:600">ตัวอย่าง:</div>
+        <div style="font-size:13px;color:var(--emerald-d)">CBAM Package ฿249,000 → หลัง OSMEP = จ่ายจริง <strong>฿124,500</strong></div>
+        <div style="font-size:13px;color:var(--emerald-d)">ROI จากชิปเมนต์แรก = ประหยัด ฿400,000+ = คืนทุน 3× ทันที</div>
+      </div>
+    </div>
+    <div class="card">
+      <h4>วิธีใช้ใน Sales Process</h4>
+      <ol style="padding-left:20px;font-size:14px;color:var(--text-sub);line-height:2.1">
+        <li>เปิดด้วย ROI Story ก่อน — ไม่ใช่ราคา</li>
+        <li>เมื่อลูกค้า Hesitate เรื่องราคา → แนะนำ OSMEP ทันที</li>
+        <li>Assistant ช่วยเตรียมเอกสารยื่น (ลด Friction ลูกค้า)</li>
+        <li>ราคาสุทธิลูกค้าจ่าย = ครึ่งเดียว</li>
+        <li>ปิด Deal ง่ายขึ้น — Objection หายไปทันที</li>
+      </ol>
+      <div class="alert alert-green" style="margin-top:12px;margin-bottom:0;font-size:13px">
+        <strong>Sales Script:</strong> "เราช่วยยื่น OSMEP BDS ให้ครับ — ราคาจริงที่คุณจ่ายแค่ ฿124,500 และคืนทุนได้จากชิปเมนต์แรกเลย"
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════
+     TAB 4: SALES GUIDE — FRAMEWORK + PERSONA + SPIN
+════════════════════════════════════════ -->
+<div class="section" id="tab4">
+<div class="page-body">
+  <div class="section-intro">
+    <h2>Sales Guide — Framework & Methodology</h2>
+    <p>เครื่องมือสำหรับทีม Sales 3 คน ใช้ SCQA + SPIN + Persona-based Approach<br>เป้าหมาย: ปิด 10–20 deals ใน 90 วัน ด้วย Conversion Rate 15–20%</p>
+    <div class="intro-meta">
+      <span class="tag tag-green">SCQA Framework</span>
+      <span class="tag tag-blue">SPIN Selling</span>
+      <span class="tag tag-amber">Buyer Persona 4 แบบ</span>
+      <span class="tag tag-red">Objection Handling</span>
+    </div>
+  </div>
+
+  <!-- SUB-TABS FOR SALES GUIDE -->
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px" id="sgTabs">
+    <button id="sgBtn-0" onclick="window.sgTab(0)" style="padding:9px 18px;border-radius:var(--r-lg);border:2px solid var(--navy);background:var(--navy);color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans)">Buyer Personas</button>
+    <button id="sgBtn-1" onclick="window.sgTab(1)" style="padding:9px 18px;border-radius:var(--r-lg);border:1.5px solid var(--line2);background:var(--bg-card);color:var(--text-sub);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--sans)">SCQA Framework</button>
+    <button id="sgBtn-2" onclick="window.sgTab(2)" style="padding:9px 18px;border-radius:var(--r-lg);border:1.5px solid var(--line2);background:var(--bg-card);color:var(--text-sub);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--sans)">SPIN Selling</button>
+    <button id="sgBtn-3" onclick="window.sgTab(3)" style="padding:9px 18px;border-radius:var(--r-lg);border:1.5px solid var(--line2);background:var(--bg-card);color:var(--text-sub);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--sans)">Objection Handling</button>
+    <button id="sgBtn-4" onclick="window.sgTab(4)" style="padding:9px 18px;border-radius:var(--r-lg);border:1.5px solid var(--line2);background:var(--bg-card);color:var(--text-sub);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--sans)">Sales Pipeline</button>
+  </div>
+
+  <!-- PERSONA SECTION -->
+  <div id="sg-panel-0">
+    <div class="sec-label">Buyer Persona — 4 ประเภทลูกค้าหลัก</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+
+      <div class="card" style="border-top:4px solid var(--red)">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <div style="width:42px;height:42px;border-radius:50%;background:var(--red-dim);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🏭</div>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:var(--navy)">Persona 1: "เจ้าของโรงงาน EU Exporter"</div>
+            <div style="font-size:12px;color:var(--text-muted);font-family:var(--mono)">P1 Target · CBAM Urgency · Decision Maker</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;margin-bottom:12px">
+          <div style="background:var(--bg-muted);padding:8px;border-radius:6px"><div style="color:var(--text-muted);font-size:11px;margin-bottom:3px">อายุ</div><div style="font-weight:600">45–65 ปี</div></div>
+          <div style="background:var(--bg-muted);padding:8px;border-radius:6px"><div style="color:var(--text-muted);font-size:11px;margin-bottom:3px">ตำแหน่ง</div><div style="font-weight:600">เจ้าของ / MD</div></div>
+          <div style="background:var(--bg-muted);padding:8px;border-radius:6px"><div style="color:var(--text-muted);font-size:11px;margin-bottom:3px">Sector</div><div style="font-weight:600">Steel, Aluminum, Cement</div></div>
+          <div style="background:var(--bg-muted);padding:8px;border-radius:6px"><div style="color:var(--text-muted);font-size:11px;margin-bottom:3px">ตัดสินใจ</div><div style="font-weight:600">คนเดียว 90%</div></div>
+        </div>
+        <div style="font-size:13px;color:var(--text-sub);margin-bottom:8px"><strong style="color:var(--red)">Pain Point หลัก:</strong> กลัว CBAM ทำให้แพ้คู่แข่ง EU, ไม่รู้ต้องทำอะไรก่อน, ไม่มีเวลาศึกษา</div>
+        <div style="font-size:13px;color:var(--text-sub);margin-bottom:8px"><strong style="color:var(--emerald-d)">Trigger:</strong> EU Customer เริ่มถาม Carbon Data, ได้ยินข่าว CBAM จาก FTI</div>
+        <div style="font-size:13px;color:var(--text-sub);margin-bottom:12px"><strong>ช่องทางที่ใช้:</strong> Facebook, Line ส่วนตัว, เพื่อนโรงงานในนิคม</div>
+        <div style="background:var(--red-dim);border-radius:8px;padding:10px 12px">
+          <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:4px">Opening Line ที่ใช้ได้ผล:</div>
+          <div style="font-size:13px;color:var(--red);font-style:italic">"คุณส่งออก Steel ไป EU ไหมครับ? ตั้งแต่ ม.ค. ที่ผ่านมา EU บังคับแล้วว่าต้องมี Verified Carbon Data — ถ้าไม่มีจะโดนค่า Default สูงขึ้นทุกปี ผมคำนวณให้ดูสดๆ ได้เลยครับ"</div>
+        </div>
+      </div>
+
+      <div class="card" style="border-top:4px solid var(--amber)">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <div style="width:42px;height:42px;border-radius:50%;background:var(--amber-dim);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🔗</div>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:var(--navy)">Persona 2: "ผู้จัดการ Supply Chain JP/EU"</div>
+            <div style="font-size:12px;color:var(--text-muted);font-family:var(--mono)">P2 Target · Buyer Pressure · Technical Decision</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;margin-bottom:12px">
+          <div style="background:var(--bg-muted);padding:8px;border-radius:6px"><div style="color:var(--text-muted);font-size:11px;margin-bottom:3px">อายุ</div><div style="font-weight:600">35–50 ปี</div></div>
+          <div style="background:var(--bg-muted);padding:8px;border-radius:6px"><div style="color:var(--text-muted);font-size:11px;margin-bottom:3px">ตำแหน่ง</div><div style="font-weight:600">SCM Manager / GM</div></div>
+          <div style="background:var(--bg-muted);padding:8px;border-radius:6px"><div style="color:var(--text-muted);font-size:11px;margin-bottom:3px">Sector</div><div style="font-weight:600">Auto, Electronics Tier-1/2</div></div>
+          <div style="background:var(--bg-muted);padding:8px;border-radius:6px"><div style="color:var(--text-muted);font-size:11px;margin-bottom:3px">ตัดสินใจ</div><div style="font-weight:600">เสนอ MD อีกที</div></div>
+        </div>
+        <div style="font-size:13px;color:var(--text-sub);margin-bottom:8px"><strong style="color:var(--amber)">Pain Point หลัก:</strong> Buyer (Toyota, Honda, Bosch) ส่ง Form มาขอ Scope 3 data — ไม่รู้จะหาข้อมูลจากไหน</div>
+        <div style="font-size:13px;color:var(--text-sub);margin-bottom:8px"><strong style="color:var(--emerald-d)">Trigger:</strong> ได้รับ RFQ ที่มีข้อกำหนด Carbon Footprint, เสี่ยงหลุด PO</div>
+        <div style="background:var(--amber-dim);border-radius:8px;padding:10px 12px;margin-top:10px">
+          <div style="font-size:12px;font-weight:700;color:var(--amber);margin-bottom:4px">Opening Line:</div>
+          <div style="font-size:13px;color:var(--amber);font-style:italic">"ได้รับ Form จาก [Buyer] ขอ Carbon Footprint ไหมครับ? เราช่วยจัดทำ CFP ให้ได้ตามที่เขาต้องการ พร้อม Report ที่ Submit ได้เลย"</div>
+        </div>
+      </div>
+
+      <div class="card" style="border-top:4px solid var(--blue)">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <div style="width:42px;height:42px;border-radius:50%;background:var(--blue-dim);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🏦</div>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:var(--navy)">Persona 3: "ผู้บริหาร SME สมัคร Green Loan"</div>
+            <div style="font-size:12px;color:var(--text-muted);font-family:var(--mono)">P3 Target · Bank Pressure · Cost-sensitive</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;margin-bottom:12px">
+          <div style="background:var(--bg-muted);padding:8px;border-radius:6px"><div style="color:var(--text-muted);font-size:11px;margin-bottom:3px">อายุ</div><div style="font-weight:600">40–60 ปี</div></div>
+          <div style="background:var(--bg-muted);padding:8px;border-radius:6px"><div style="color:var(--text-muted);font-size:11px;margin-bottom:3px">ตำแหน่ง</div><div style="font-weight:600">เจ้าของ / CFO</div></div>
+          <div style="background:var(--bg-muted);padding:8px;border-radius:6px"><div style="color:var(--text-muted);font-size:11px;margin-bottom:3px">Sector</div><div style="font-weight:600">Manufacturing ทั่วไป</div></div>
+          <div style="background:var(--bg-muted);padding:8px;border-radius:6px"><div style="color:var(--text-muted);font-size:11px;margin-bottom:3px">Trigger</div><div style="font-weight:600">RM ธนาคารบอกว่าต้องมี</div></div>
+        </div>
+        <div style="font-size:13px;color:var(--text-sub);margin-bottom:8px"><strong style="color:var(--blue)">Pain Point:</strong> ธนาคารต้องการ GHG Report ก่อนอนุมัติ Green Loan อัตราดอกเบี้ยพิเศษ</div>
+        <div style="background:var(--blue-dim);border-radius:8px;padding:10px 12px;margin-top:10px">
+          <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:4px">Opening Line:</div>
+          <div style="font-size:13px;color:var(--blue);font-style:italic">"RM บอกว่าต้องมี GHG Report ก่อนอนุมัติสินเชื่อใช่ไหมครับ? เราทำ CFO Report ให้ได้ในเวลาที่ธนาคารต้องการ และ OSMEP ช่วยออก 50% ค่าบริการด้วยครับ"</div>
+        </div>
+      </div>
+
+      <div class="card" style="border-top:4px solid var(--teal)">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <div style="width:42px;height:42px;border-radius:50%;background:var(--teal-dim);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🌿</div>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:var(--navy)">Persona 4: "ผู้จัดการโรงงาน Green Industry"</div>
+            <div style="font-size:12px;color:var(--text-muted);font-family:var(--mono)">P4 Target · DIW Compliance · Long-term</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;margin-bottom:12px">
+          <div style="background:var(--bg-muted);padding:8px;border-radius:6px"><div style="color:var(--text-muted);font-size:11px;margin-bottom:3px">อายุ</div><div style="font-weight:600">35–55 ปี</div></div>
+          <div style="background:var(--bg-muted);padding:8px;border-radius:6px"><div style="color:var(--text-muted);font-size:11px;margin-bottom:3px">ตำแหน่ง</div><div style="font-weight:600">Plant Manager / EHS</div></div>
+          <div style="background:var(--bg-muted);padding:8px;border-radius:6px"><div style="color:var(--text-muted);font-size:11px;margin-bottom:3px">Sector</div><div style="font-weight:600">Manufacturing ทั่วไป</div></div>
+          <div style="background:var(--bg-muted);padding:8px;border-radius:6px"><div style="color:var(--text-muted);font-size:11px;margin-bottom:3px">Trigger</div><div style="font-weight:600">ต้อง Upgrade เป็น Level 3</div></div>
+        </div>
+        <div style="font-size:13px;color:var(--text-sub);margin-bottom:8px"><strong style="color:var(--teal)">Pain Point:</strong> อยู่ Green Industry Level 1 อยากได้ Level 3 เพื่อเพิ่ม Image และ Tender Advantage</div>
+        <div style="background:var(--teal-dim);border-radius:8px;padding:10px 12px;margin-top:10px">
+          <div style="font-size:12px;font-weight:700;color:var(--teal);margin-bottom:4px">Opening Line:</div>
+          <div style="font-size:13px;color:var(--teal);font-style:italic">"ตอนนี้อยู่ Green Industry Level ไหนครับ? ถ้าจะขึ้น Level 3 ต้องมี CFO Report — เราช่วยจัดทำให้ครบได้ใน X สัปดาห์ครับ"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCQA SECTION -->
+  <div id="sg-panel-1" style="display:none">
+    <div class="sec-label">SCQA Framework — โครงสร้างการนำเสนอที่ได้ผล</div>
+    <div class="alert alert-amber">SCQA = Situation → Complication → Question → Answer — ใช้เปิด Presentation ทุกครั้ง ทำให้ลูกค้าเข้าใจว่า "ทำไมต้องทำตอนนี้"</div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px">
+      <div class="card" style="border-top:4px solid var(--navy)">
+        <div style="font-size:24px;font-weight:800;color:var(--navy);font-family:var(--mono);margin-bottom:6px">S</div>
+        <div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:8px">Situation</div>
+        <div style="font-size:13px;color:var(--text-sub);line-height:1.7">"คุณส่งออก [Product] ไปตลาด EU และเป็นผู้ผลิตที่มีประสบการณ์มากกว่า X ปีในอุตสาหกรรม [Sector]"<br><br>→ ยืนยันว่าเข้าใจลูกค้า</div>
+      </div>
+      <div class="card" style="border-top:4px solid var(--red)">
+        <div style="font-size:24px;font-weight:800;color:var(--red);font-family:var(--mono);margin-bottom:6px">C</div>
+        <div style="font-size:14px;font-weight:700;color:var(--red);margin-bottom:8px">Complication</div>
+        <div style="font-size:13px;color:var(--text-sub);line-height:1.7">"แต่ตั้งแต่ ม.ค. 2569 EU บังคับ CBAM — ถ้าไม่มี Verified Carbon Data ต้องจ่าย Default Value ซึ่งสูงกว่าความจริง 3–17 เท่า คาดว่าจะเสียเพิ่ม <strong>[คำนวณ Live] บาทต่อปี</strong>"<br><br>→ สร้าง Urgency ด้วยตัวเลข</div>
+      </div>
+      <div class="card" style="border-top:4px solid var(--amber)">
+        <div style="font-size:24px;font-weight:800;color:var(--amber);font-family:var(--mono);margin-bottom:6px">Q</div>
+        <div style="font-size:14px;font-weight:700;color:var(--amber);margin-bottom:8px">Question</div>
+        <div style="font-size:13px;color:var(--text-sub);line-height:1.7">"แล้วโรงงานของคุณจะจัดการกับ CBAM นี้อย่างไร? จะใช้ Default Value แพงๆ ต่อไป หรือ Verify Actual ที่ถูกกว่ามาก?"<br><br>→ ให้ลูกค้าตอบตัวเอง</div>
+      </div>
+      <div class="card" style="border-top:4px solid var(--emerald)">
+        <div style="font-size:24px;font-weight:800;color:var(--emerald-d);font-family:var(--mono);margin-bottom:6px">A</div>
+        <div style="font-size:14px;font-weight:700;color:var(--emerald-d);margin-bottom:8px">Answer</div>
+        <div style="font-size:13px;color:var(--text-sub);line-height:1.7">"หมอโรงงานมี CBAM Fast-Track Package ที่ทำให้คุณมี Verified Carbon Data ภายใน 6 สัปดาห์ ค่าบริการ ฿249,000 (฿124,500 หลัง OSMEP) — คืนทุนได้จากชิปเมนต์แรก"<br><br>→ Propose ทันที</div>
+      </div>
+    </div>
+
+    <div class="sec-label">SCQA Script ตัวอย่าง — Persona 1 (EU Exporter)</div>
+    <div class="card" style="border-left:4px solid var(--navy)">
+      <div style="font-size:14px;line-height:2;color:var(--text-sub)">
+        <div style="margin-bottom:12px"><strong style="color:var(--navy)">S (Situation):</strong><br>"คุณส่งออก Steel ไปตลาด EU มากกว่า X ปีแล้ว และเป็นผู้ผลิตที่ลูกค้า EU ไว้วางใจ — นั่นคือสิ่งที่เราเห็นว่าเป็นจุดแข็งของคุณครับ"</div>
+        <div style="margin-bottom:12px"><strong style="color:var(--red)">C (Complication):</strong><br>"แต่ตั้งแต่ 1 มกราคม 2569 EU บังคับใช้ CBAM Definitive Phase แล้ว — โรงงานที่ไม่มี Verified Emissions Data ต้องจ่าย Default Value ซึ่งคาดการณ์ว่าสำหรับ Steel ของคุณที่ส่งออก [X] ตันต่อปี จะเสียเพิ่มประมาณ <strong style="color:var(--red)">[คำนวณสด] บาทต่อปี</strong> นับจากปีนี้เป็นต้นไป"</div>
+        <div style="margin-bottom:12px"><strong style="color:var(--amber)">Q (Question):</strong><br>"คำถามคือ โรงงานของคุณพร้อมรับมือกับต้นทุนส่วนนี้ไหมครับ? และถ้าเราสามารถลดต้นทุนส่วนนี้ลงได้ ฟังดูน่าสนใจไหม?"</div>
+        <div><strong style="color:var(--emerald-d)">A (Answer):</strong><br>"หมอโรงงานมี CBAM Fast-Track Package ที่ช่วยจัดทำ Verified Embedded Emissions Report สำหรับ EU ภายใน 6 สัปดาห์ ค่าบริการ ฿249,000 — และเราช่วยยื่นขอ OSMEP BDS ด้วย เหลือจ่ายจริงแค่ ฿124,500 ซึ่งจากการคำนวณเมื่อกี้ คุณจะคืนทุนได้จากชิปเมนต์แรกเลยครับ"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPIN SELLING SECTION -->
+  <div id="sg-panel-2" style="display:none">
+    <div class="sec-label">SPIN Selling — คำถามที่ทำให้ลูกค้าตัดสินใจเอง</div>
+    <div class="alert alert-green">SPIN = Situation → Problem → Implication → Need-Payoff — ใช้คำถามนำ ไม่ใช้ Hard Sell ลูกค้าไทย (โดยเฉพาะเจ้าของโรงงาน) ตัดสินใจเองหลังเห็นภาพชัดด้วยตัวเอง</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+      <div class="card" style="border-left:4px solid var(--blue)">
+        <div style="font-size:13px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;font-family:var(--mono)">S — Situation Questions</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:10px">ถามเพื่อเก็บข้อมูล — ไม่ถามมาก จะดูว่า Research มาไม่ดี</div>
+        <ul style="list-style:none;font-size:14px;color:var(--text-sub)">
+          <li style="padding:7px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--blue);flex-shrink:0">→</span>"ตอนนี้โรงงานส่งออกไป EU ปีละประมาณกี่ตันครับ?"</li>
+          <li style="padding:7px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--blue);flex-shrink:0">→</span>"ปัจจุบันทำ GHG Inventory หรือ Carbon Footprint ไว้บ้างไหมครับ?"</li>
+          <li style="padding:7px 0;display:flex;gap:8px"><span style="color:var(--blue);flex-shrink:0">→</span>"ลูกค้า EU ถามเรื่อง Carbon Data มาบ้างไหม?"</li>
+        </ul>
+      </div>
+      <div class="card" style="border-left:4px solid var(--amber)">
+        <div style="font-size:13px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;font-family:var(--mono)">P — Problem Questions</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:10px">ถามให้ลูกค้าพูดปัญหาออกมาเอง — มีพลังกว่าเราบอกเอง</div>
+        <ul style="list-style:none;font-size:14px;color:var(--text-sub)">
+          <li style="padding:7px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--amber);flex-shrink:0">→</span>"ถ้ายังไม่มี Verified Carbon Data ตอนนี้ คิดว่าจะกระทบ Order ไหมครับ?"</li>
+          <li style="padding:7px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--amber);flex-shrink:0">→</span>"ถ้าต้องใช้ Default Value ของ EU คิดว่าต้นทุนจะเปลี่ยนแปลงอย่างไร?"</li>
+          <li style="padding:7px 0;display:flex;gap:8px"><span style="color:var(--amber);flex-shrink:0">→</span>"ตอนนี้มีทีมภายในที่ดูแลเรื่อง Carbon Compliance ไหม?"</li>
+        </ul>
+      </div>
+      <div class="card" style="border-left:4px solid var(--red)">
+        <div style="font-size:13px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;font-family:var(--mono)">I — Implication Questions</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:10px">ขยายผลของปัญหา — ทำให้ลูกค้าเห็นว่า "ไม่ทำ" มีผลกระทบระยะยาว</div>
+        <ul style="list-style:none;font-size:14px;color:var(--text-sub)">
+          <li style="padding:7px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--red);flex-shrink:0">→</span>"ถ้าคู่แข่งเริ่มมี Verified Carbon ก่อน คิดว่าจะกระทบราคาและ Order ของคุณยังไงครับ?"</li>
+          <li style="padding:7px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--red);flex-shrink:0">→</span>"CBAM Default Value จะปรับขึ้น +10% ทุกปี — ถ้าปล่อยไป 3 ปีต้นทุนเพิ่มขึ้นเท่าไหร่?"</li>
+          <li style="padding:7px 0;display:flex;gap:8px"><span style="color:var(--red);flex-shrink:0">→</span>"ถ้าลูกค้า EU เริ่ม Switch ไปซื้อจาก Supplier ที่มี Carbon Data ครบ โรงงานจะรับมือได้ไหม?"</li>
+        </ul>
+      </div>
+      <div class="card" style="border-left:4px solid var(--emerald)">
+        <div style="font-size:13px;font-weight:700;color:var(--emerald-d);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;font-family:var(--mono)">N — Need-Payoff Questions</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:10px">ให้ลูกค้าพูด Solution เอง — มีพลังมากที่สุด ปิดการขายตัวเอง</div>
+        <ul style="list-style:none;font-size:14px;color:var(--text-sub)">
+          <li style="padding:7px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--emerald-d);flex-shrink:0">→</span>"ถ้ามี Verified Carbon Data ครบ คิดว่าจะช่วยเรื่อง Order และต้นทุนได้แค่ไหนครับ?"</li>
+          <li style="padding:7px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--emerald-d);flex-shrink:0">→</span>"ถ้าเราช่วยทำให้เสร็จภายใน 6 สัปดาห์ ทันก่อน Q3 Shipment — คุ้มค่าไหม?"</li>
+          <li style="padding:7px 0;display:flex;gap:8px"><span style="color:var(--emerald-d);flex-shrink:0">→</span>"ถ้าลดต้นทุน CBAM ลงได้ ฿400,000+ ต่อปี ค่าบริการ ฿124,500 (หลัง OSMEP) ถือว่าคุ้มไหมครับ?"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- OBJECTION HANDLING -->
+  <div id="sg-panel-3" style="display:none">
+    <div class="sec-label">Objection Handling — คำตอบสำหรับทุก Objection</div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="card" style="border-left:4px solid var(--amber)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+          <div style="flex:1">
+            <div style="font-size:14px;font-weight:700;color:var(--amber);margin-bottom:8px">Objection 1: "แพงเกินไป / ยังไม่มีงบ"</div>
+            <div style="font-size:13px;color:var(--text-sub)"><strong>ตอบ:</strong> "เข้าใจครับ — ก็เลยอยากถามว่า ตอนนี้ถ้าใช้ Default Value ของ EU เสียเพิ่มอยู่ [X บาท/ปี] ใช่ไหมครับ? ค่าบริการ ฿249,000 ถ้าได้รับ OSMEP เหลือ ฿124,500 — เทียบกับที่ประหยัดได้ปีแรก [คำนวณสด] คิดว่าคุ้มไหมครับ?"</div>
+          </div>
+          <div style="background:var(--emerald-dim);border-radius:8px;padding:10px 14px;min-width:140px;text-align:center">
+            <div style="font-size:11px;color:var(--emerald-d);margin-bottom:4px">เครื่องมือ</div>
+            <div style="font-size:13px;font-weight:700;color:var(--emerald-d)">OSMEP BDS<br>ลด 50%</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="border-left:4px solid var(--amber)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+          <div style="flex:1">
+            <div style="font-size:14px;font-weight:700;color:var(--amber);margin-bottom:8px">Objection 2: "รอดูก่อน ยังไม่แน่ใจว่า CBAM จะบังคับจริงไหม"</div>
+            <div style="font-size:13px;color:var(--text-sub)"><strong>ตอบ:</strong> "เข้าใจความกังวลครับ แต่ CBAM Definitive Phase เริ่มแล้วตั้งแต่ ม.ค. 2026 — ลูกค้า EU ของคุณเริ่มถามเรื่อง Carbon Data กันแล้ว คู่แข่งบางรายเริ่มทำแล้ว ถ้ารอแล้วเขาทำก่อน อาจกระทบ Order ได้ครับ เราเสนอให้เริ่มด้วย Carbon Readiness Scorecard ฟรีก่อนได้เลย ใช้เวลาแค่ 2 ชั่วโมง"</div>
+          </div>
+          <div style="background:var(--blue-dim);border-radius:8px;padding:10px 14px;min-width:140px;text-align:center">
+            <div style="font-size:11px;color:var(--blue);margin-bottom:4px">เครื่องมือ</div>
+            <div style="font-size:13px;font-weight:700;color:var(--blue)">Free Scorecard<br>Low Risk</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="border-left:4px solid var(--amber)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+          <div style="flex:1">
+            <div style="font-size:14px;font-weight:700;color:var(--amber);margin-bottom:8px">Objection 3: "มีคนอื่นทำถูกกว่า / เราทำเองได้"</div>
+            <div style="font-size:13px;color:var(--text-sub)"><strong>ตอบ:</strong> "ดีมากเลยครับที่มีตัวเลือก — แต่ขอถามว่า บริษัทนั้นมี VVB ลงทะเบียนกับ TGO ไหมครับ? เพราะ CBAM Report ที่ EU ยอมรับต้องผ่าน Third-party Verification ที่ได้มาตรฐาน ISO 14064-3 — ถ้าทำเองหรือใช้บริษัทที่ไม่มี VVB Network อาจยื่น EU ไม่ได้ครับ"</div>
+          </div>
+          <div style="background:var(--red-dim);border-radius:8px;padding:10px 14px;min-width:140px;text-align:center">
+            <div style="font-size:11px;color:var(--red);margin-bottom:4px">เครื่องมือ</div>
+            <div style="font-size:13px;font-weight:700;color:var(--red)">VVB Network<br>Differentiator</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="border-left:4px solid var(--amber)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+          <div style="flex:1">
+            <div style="font-size:14px;font-weight:700;color:var(--amber);margin-bottom:8px">Objection 4: "ขอไปปรึกษาก่อน / ไม่ใช่ผู้ตัดสินใจ"</div>
+            <div style="font-size:13px;color:var(--text-sub)"><strong>ตอบ:</strong> "ได้เลยครับ — ขอให้ช่วยได้ไหม ถ้าผมทำ Summary 1 หน้าพร้อม ROI Calculation เฉพาะโรงงานของคุณ คุณนำไปเสนอผู้บริหารได้ง่ายขึ้นไหม? ผมจัดทำให้ภายใน 24 ชั่วโมงครับ"</div>
+          </div>
+          <div style="background:var(--emerald-dim);border-radius:8px;padding:10px 14px;min-width:140px;text-align:center">
+            <div style="font-size:11px;color:var(--emerald-d);margin-bottom:4px">เครื่องมือ</div>
+            <div style="font-size:13px;font-weight:700;color:var(--emerald-d)">1-Page ROI<br>Summary</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SALES PIPELINE -->
+  <div id="sg-panel-4" style="display:none">
+    <div class="sec-label">Sales Pipeline — 5 Stage ที่ต้องติดตาม</div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:24px">
+      <div class="card" style="text-align:center;border-top:4px solid var(--text-muted)">
+        <div style="font-size:20px;font-weight:800;color:var(--text-muted);font-family:var(--mono);margin-bottom:6px">L</div>
+        <div style="font-size:13px;font-weight:700;color:var(--text-main);margin-bottom:6px">Lead</div>
+        <div style="font-size:12px;color:var(--text-sub)">ได้ Contact<br>ยังไม่ได้คุย</div>
+        <div style="margin-top:8px;font-size:11px;font-family:var(--mono);color:var(--text-muted)">Target: 80–100</div>
+      </div>
+      <div class="card" style="text-align:center;border-top:4px solid var(--blue)">
+        <div style="font-size:20px;font-weight:800;color:var(--blue);font-family:var(--mono);margin-bottom:6px">Q</div>
+        <div style="font-size:13px;font-weight:700;color:var(--text-main);margin-bottom:6px">Qualified</div>
+        <div style="font-size:12px;color:var(--text-sub)">คุยแล้ว<br>มี Fit + Budget</div>
+        <div style="margin-top:8px;font-size:11px;font-family:var(--mono);color:var(--blue)">Conv: 40%</div>
+      </div>
+      <div class="card" style="text-align:center;border-top:4px solid var(--amber)">
+        <div style="font-size:20px;font-weight:800;color:var(--amber);font-family:var(--mono);margin-bottom:6px">P</div>
+        <div style="font-size:13px;font-weight:700;color:var(--text-main);margin-bottom:6px">Proposal</div>
+        <div style="font-size:12px;color:var(--text-sub)">ส่ง Proposal<br>แล้ว รอ</div>
+        <div style="margin-top:8px;font-size:11px;font-family:var(--mono);color:var(--amber)">Conv: 50%</div>
+      </div>
+      <div class="card" style="text-align:center;border-top:4px solid var(--red)">
+        <div style="font-size:20px;font-weight:800;color:var(--red);font-family:var(--mono);margin-bottom:6px">N</div>
+        <div style="font-size:13px;font-weight:700;color:var(--text-main);margin-bottom:6px">Negotiate</div>
+        <div style="font-size:12px;color:var(--text-sub)">ต่อรอง<br>ราคา/scope</div>
+        <div style="margin-top:8px;font-size:11px;font-family:var(--mono);color:var(--red)">Conv: 75%</div>
+      </div>
+      <div class="card" style="text-align:center;border-top:4px solid var(--emerald)">
+        <div style="font-size:20px;font-weight:800;color:var(--emerald-d);font-family:var(--mono);margin-bottom:6px">C</div>
+        <div style="font-size:13px;font-weight:700;color:var(--text-main);margin-bottom:6px">Closed</div>
+        <div style="font-size:12px;color:var(--text-sub)">เซ็นสัญญา<br>แล้ว</div>
+        <div style="margin-top:8px;font-size:11px;font-family:var(--mono);color:var(--emerald-d)">Target: 15–20</div>
+      </div>
+    </div>
+    <div class="sec-label">Weekly Sales Tracker</div>
+    <table class="tbl">
+      <thead><tr><th>เมตริก</th><th>สัปดาห์ 1–2</th><th>สัปดาห์ 3–4</th><th>สัปดาห์ 5–6</th><th>สัปดาห์ 7–8</th><th>สัปดาห์ 9–12</th></tr></thead>
+      <tbody>
+        <tr><td class="emph">Leads ใหม่</td><td>20+</td><td>15+</td><td>20+</td><td>10+</td><td>15+</td></tr>
+        <tr><td class="emph">Qualified</td><td>8+</td><td>8+</td><td>10+</td><td>6+</td><td>8+</td></tr>
+        <tr><td class="emph">Proposals ส่ง</td><td>5+</td><td>5+</td><td>6+</td><td>4+</td><td>5+</td></tr>
+        <tr><td class="emph">Deals ปิด</td><td style="color:var(--emerald-d);font-weight:600">2–3</td><td style="color:var(--emerald-d);font-weight:600">3–4</td><td style="color:var(--emerald-d);font-weight:600">3–4</td><td style="color:var(--emerald-d);font-weight:600">3–4</td><td style="color:var(--emerald-d);font-weight:600">4–5</td></tr>
+        <tr><td class="emph">Revenue สะสม</td><td>฿350K–700K</td><td>฿800K–1.3M</td><td>฿1.5M–2M</td><td>฿2M–2.6M</td><td>฿2.8M–3.5M+</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-navy" style="margin-top:20px">
+      <strong>กฎ CRM รายสัปดาห์:</strong> ทุกวันศุกร์ Sales อัปเดต Stage ของทุก Lead · Flag leads ที่ค้างใน Proposal &gt; 7 วัน → Escalate → ส่ง Objection email · Lead ที่ Qualified แล้ว &gt; 14 วันยังไม่ได้ Proposal = Warning
+    </div>
+  </div>
+
+
+</div>
+</div>
+
+<!-- ════════════════════════════════════════
+     TAB 5: SERVICE PACKAGES (renumbered)
+════════════════════════════════════════ -->
+<div class="section" id="tab5">
+<div class="page-body">
+  <div class="section-intro">
+    <h2>Service Packages & Product Catalog</h2>
+    <p>อ้างอิงจาก Carbon Service Package Rev02 (มี.ค. 2026) — บริการแบ่งเป็น 4 กลุ่มหลัก<br>Carbon Readiness Scorecard ให้ <strong style="color:var(--emerald)">ฟรี 100%</strong> — ใช้เป็น Lead Magnet เท่านั้น</p>
+    <div class="intro-meta">
+      <span class="tag tag-red">กลุ่ม 1: Carbon Footprint</span>
+      <span class="tag tag-amber">กลุ่ม 2: Carbon Credit / REC</span>
+      <span class="tag tag-blue">กลุ่ม 3: Net Zero Pathway</span>
+      <span class="tag tag-green">กลุ่ม 4: Green Finance / ESG</span>
+    </div>
+  </div>
+
+  <!-- HERO PRODUCTS -->
+  <div class="sec-label">Hero Products — ปิด Deal ได้เร็วที่สุด</div>
+  <div class="offer-grid mb-32">
+    <div class="offer-card hero">
+      <div class="offer-tag" style="color:var(--emerald-d)">Hero Product — P1 CBAM · กลุ่ม 1</div>
+      <div class="offer-name">CBAM Embedded Emissions Package</div>
+      <div class="offer-price">฿249,000 <span>ต่อโรงงาน</span></div>
+      <div class="offer-note">OSMEP BDS: เหลือจ่ายจริง ฿124,500</div>
+      <ul class="offer-items">
+        <li>Activity Data Collection (factory-visit)</li>
+        <li>Embedded Emissions Calculation ตาม EU Regulation 2023/956</li>
+        <li>CBAM Report พร้อม Submit EU Importer</li>
+        <li>VVB Verification Coordination (ISO 14064-3)</li>
+        <li>Deliver ใน 6 สัปดาห์</li>
+        <li>OSMEP BDS Subsidy Filing Assistance</li>
+      </ul>
+      <div class="offer-why ow-green">ROI ทันที: ประหยัด Default Value > ค่าบริการตั้งแต่ชิปเมนต์แรก</div>
+    </div>
+    <div class="offer-card">
+      <div class="offer-tag" style="color:var(--amber)">Upsell — P2 · กลุ่ม 1+3</div>
+      <div class="offer-name">Carbon Baseline + Net Zero Roadmap</div>
+      <div class="offer-price">฿189,000 <span>ต่อองค์กร</span></div>
+      <div class="offer-note">Bundle กับ CBAM = ACV ฿438,000</div>
+      <ul class="offer-items">
+        <li>GHG Inventory Scope 1,2,3 (ISO 14064-1)</li>
+        <li>CFO Report + TGO Submission</li>
+        <li>Gap Analysis vs. SBTi / CDP</li>
+        <li>Net Zero Roadmap 5 ปี (ISO 14068)</li>
+        <li>Monthly GHG Tracking 12 เดือน</li>
+      </ul>
+      <div class="offer-why ow-amber">ตอบโจทย์ Supply Chain JP/EU ที่ต้องการ Scope 3 Data</div>
+    </div>
+    <div class="offer-card">
+      <div class="offer-tag" style="color:var(--teal)">Entry Level — P3/P4 · กลุ่ม 1</div>
+      <div class="offer-name">CFO Certification Package</div>
+      <div class="offer-price">฿129,000 <span>ต่อองค์กร</span></div>
+      <div class="offer-note">OSMEP BDS: เหลือจ่ายจริง ฿64,500</div>
+      <ul class="offer-items">
+        <li>GHG Inventory ตาม ISO 14064-1</li>
+        <li>CFO Report + TGO Submission</li>
+        <li>Preparation สำหรับ TGO Verification</li>
+        <li>Staff Training (Basic GHG Accounting)</li>
+        <li>1-Year Follow-up Support</li>
+      </ul>
+      <div class="offer-why" style="background:var(--teal-dim);color:var(--teal)">Green Industry Level 1→3 ต้องมี CFO — ตลาดใหญ่ 55,000+ โรงงาน</div>
+    </div>
+    <div class="offer-card" style="border:2px dashed var(--line2)">
+      <div class="offer-tag" style="color:var(--blue)">Free Lead Magnet — ห้ามเก็บเงิน</div>
+      <div class="offer-name">Carbon Readiness Scorecard</div>
+      <div class="offer-price" style="color:var(--blue)">ฟรี <span>100%</span></div>
+      <div class="offer-note">ต้นทุน ฿2,000–5,000/ราย หลัง Semi-automate</div>
+      <ul class="offer-items">
+        <li>ประเมิน 5 มิติ: Awareness/Data/Regulation/Energy/Roadmap</li>
+        <li>คำนวณ CBAM Liability เป็น THB ให้เห็นชัด</li>
+        <li>PDF ภาษาไทย ส่งผ่าน LINE ภายใน 48 ชม.</li>
+        <li>Quick Wins 3 ข้อที่ทำได้ฟรี</li>
+      </ul>
+      <div class="offer-why ow-blue">Opt-in Rate 41% vs PDF ธรรมดา 15% — ส่งผ่าน LINE อ่าน 80–90%</div>
+    </div>
+  </div>
+
+  <!-- FULL SERVICE CATALOG FROM PDF -->
+  <div class="sec-label">กลุ่มที่ 1 — Carbon Footprint Services (อ้างอิง PDF Rev02)</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px">
+
+    <div class="card" style="border-top:3px solid var(--navy)">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <div style="background:var(--navy);color:#fff;font-size:10px;font-weight:700;font-family:var(--mono);padding:3px 8px;border-radius:4px">CFO</div>
+        <div style="font-size:14px;font-weight:700;color:var(--navy)">Carbon Footprint for Organization</div>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);font-family:var(--mono);margin-bottom:8px">ISO 14064-1 · TGO CFO Certificate</div>
+      <ul style="list-style:none;font-size:13px;color:var(--text-sub)">
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">GHG Inventory Scope 1, 2, 3</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">Report + Calculation Sheet ตามแบบ TGO</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">Coordination กับ VVB ที่ลงทะเบียน TGO</li>
+        <li style="padding:5px 0">ขอ TGO CFO Certificate</li>
+      </ul>
+      <div style="margin-top:10px;font-size:12px;font-family:var(--mono);color:var(--emerald-d);font-weight:600">฿89,000–249,000 / หลัง OSMEP: ฿45K–125K</div>
+      <div style="margin-top:6px;font-size:11px;color:var(--text-muted)">Sector: Manufacturing, Energy, Petrochemicals, Metals, Services</div>
+    </div>
+
+    <div class="card" style="border-top:3px solid var(--teal)">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <div style="background:var(--teal);color:#fff;font-size:10px;font-weight:700;font-family:var(--mono);padding:3px 8px;border-radius:4px">CFP</div>
+        <div style="font-size:14px;font-weight:700;color:var(--navy)">Carbon Footprint of Product</div>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);font-family:var(--mono);margin-bottom:8px">ISO 14067 · ISO 14040/44 LCA · TGO CFP Certificate</div>
+      <ul style="list-style:none;font-size:13px;color:var(--text-sub)">
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">Life Cycle Assessment (LCA) ครบวงจร</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">Bill of Materials + Supply Chain Mapping</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">CFP Report + Calculation Sheet</li>
+        <li style="padding:5px 0">TGO / ISO 14067 Certificate</li>
+      </ul>
+      <div style="margin-top:10px;font-size:12px;font-family:var(--mono);color:var(--emerald-d);font-weight:600">฿69,000–149,000 / หลัง OSMEP: ฿35K–75K</div>
+      <div style="margin-top:6px;font-size:11px;color:var(--text-muted)">Sector: Steel, Aluminum, Plastics, Electronics, Auto Parts, Food</div>
+    </div>
+
+    <div class="card" style="border-top:3px solid var(--red)">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <div style="background:var(--red);color:#fff;font-size:10px;font-weight:700;font-family:var(--mono);padding:3px 8px;border-radius:4px">CBAM</div>
+        <div style="font-size:14px;font-weight:700;color:var(--navy)">Embedded Emissions (CBAM)</div>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);font-family:var(--mono);margin-bottom:8px">EU Regulation 2023/956 · CBAM Certificate</div>
+      <ul style="list-style:none;font-size:13px;color:var(--text-sub)">
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">Embedded Emissions Calculation ระดับ Product</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">Direct + Indirect Emissions (Scope 1+2)</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">CBAM Report สำหรับยื่น EU Importer</li>
+        <li style="padding:5px 0">Factory-visit Data Collection (On-site)</li>
+      </ul>
+      <div style="margin-top:10px;font-size:12px;font-family:var(--mono);color:var(--red);font-weight:600">Hero Product ฿179,000–349,000</div>
+      <div style="margin-top:6px;font-size:11px;color:var(--text-muted)">Sector: Steel, Aluminum, Cement, Fertilizer, Electricity</div>
+    </div>
+
+    <div class="card" style="border-top:3px solid var(--amber)">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <div style="background:var(--amber);color:#fff;font-size:10px;font-weight:700;font-family:var(--mono);padding:3px 8px;border-radius:4px">EVENT</div>
+        <div style="font-size:14px;font-weight:700;color:var(--navy)">Carbon Footprint for Event</div>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);font-family:var(--mono);margin-bottom:8px">Carbon Neutral Event · TGO Standard</div>
+      <ul style="list-style:none;font-size:13px;color:var(--text-sub)">
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">วัด GHG จากงานอีเว้นท์ทั้งหมด</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">Offset ด้วย Carbon Credit / T-VER</li>
+        <li style="padding:5px 0">Carbon Neutral Event Certificate</li>
+      </ul>
+      <div style="margin-top:10px;font-size:12px;font-family:var(--mono);color:var(--emerald-d);font-weight:600">฿45,000–120,000 / event</div>
+      <div style="margin-top:6px;font-size:11px;color:var(--text-muted)">Target: Corporate Events, Conferences, Product Launches</div>
+    </div>
+
+    <div class="card" style="border-top:3px solid var(--blue)">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <div style="background:var(--blue);color:#fff;font-size:10px;font-weight:700;font-family:var(--mono);padding:3px 8px;border-radius:4px">LOGISTICS</div>
+        <div style="font-size:14px;font-weight:700;color:var(--navy)">Green Logistics</div>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);font-family:var(--mono);margin-bottom:8px">ISO 14083 · Transport Emissions</div>
+      <ul style="list-style:none;font-size:13px;color:var(--text-sub)">
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">วัด GHG จากการขนส่งทั้งห่วงโซ่</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">ISO 14083 Transport Chain Report</li>
+        <li style="padding:5px 0">Scope 3 Category 4 (Upstream Transport)</li>
+      </ul>
+      <div style="margin-top:10px;font-size:12px;font-family:var(--mono);color:var(--emerald-d);font-weight:600">฿60,000–150,000</div>
+      <div style="margin-top:6px;font-size:11px;color:var(--text-muted)">Target: Logistics Companies, Port Operators, Distributors</div>
+    </div>
+
+    <div class="card" style="border-top:3px solid var(--navy-light)">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <div style="background:var(--navy-light);color:#fff;font-size:10px;font-weight:700;font-family:var(--mono);padding:3px 8px;border-radius:4px">ISCC</div>
+        <div style="font-size:14px;font-weight:700;color:var(--navy)">ISCC Certification</div>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);font-family:var(--mono);margin-bottom:8px">International Sustainability & Carbon Certification</div>
+      <ul style="list-style:none;font-size:13px;color:var(--text-sub)">
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">ISCC EU / ISCC PLUS Certification</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">Sustainability Declaration สำหรับ Biofuels</li>
+        <li style="padding:5px 0">Mass Balance ตาม ISCC Standard</li>
+      </ul>
+      <div style="margin-top:10px;font-size:12px;font-family:var(--mono);color:var(--emerald-d);font-weight:600">฿80,000–200,000</div>
+      <div style="margin-top:6px;font-size:11px;color:var(--text-muted)">Target: Biofuel, Biomass, Chemical, Feedstock Exporters ไป EU</div>
+    </div>
+  </div>
+
+  <!-- GROUP 2: CARBON CREDIT / REC -->
+  <div class="sec-label">กลุ่มที่ 2 — Carbon Credit & REC Advisory</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px">
+    <div class="card" style="border-top:3px solid var(--emerald)">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <div style="background:var(--emerald);color:var(--navy);font-size:10px;font-weight:700;font-family:var(--mono);padding:3px 8px;border-radius:4px">T-VER</div>
+        <div style="font-size:14px;font-weight:700;color:var(--navy)">T-VER Project Advisory</div>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);font-family:var(--mono);margin-bottom:8px">Thailand Voluntary Emission Reduction · TGO</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+        <div style="background:var(--bg-muted);padding:8px;border-radius:6px;font-size:12px">
+          <div style="color:var(--text-muted);margin-bottom:3px">Project Types</div>
+          <div style="color:var(--text-sub)">Solar, EV Charger, Biogas, Low Carbon Fuel, CCS, Gas Turbine</div>
+        </div>
+        <div style="background:var(--bg-muted);padding:8px;border-radius:6px;font-size:12px">
+          <div style="color:var(--text-muted);margin-bottom:3px">Methodology</div>
+          <div style="color:var(--text-sub)">T-VER-S-METH-04-01, 01-09, 01-10, 14-01, 02-04</div>
+        </div>
+      </div>
+      <ul style="list-style:none;font-size:13px;color:var(--text-sub)">
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">Project Design Document (PDD)</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">Baseline & Additionality Analysis</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">Monitoring Plan + Annual Verification</li>
+        <li style="padding:5px 0">ประสาน VVB + TGO Registration</li>
+      </ul>
+      <div style="margin-top:10px;font-size:12px;font-family:var(--mono);color:var(--emerald-d);font-weight:600">฿150,000–500,000 ต่อโครงการ (ขึ้นกับ scale)</div>
+    </div>
+
+    <div class="card" style="border-top:3px solid var(--emerald)">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <div style="background:var(--emerald);color:var(--navy);font-size:10px;font-weight:700;font-family:var(--mono);padding:3px 8px;border-radius:4px">REC</div>
+        <div style="font-size:14px;font-weight:700;color:var(--navy)">REC / Carbon Credit Offsetting</div>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);font-family:var(--mono);margin-bottom:8px">I-REC Standard · T-VER · VERRA · Gold Standard</div>
+      <ul style="list-style:none;font-size:13px;color:var(--text-sub)">
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">จัดหา Carbon Credit สำหรับ Offsetting</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">I-REC (Renewable Energy Certificate)</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">Carbon Credit Portfolio Strategy</li>
+        <li style="padding:5px 0">ช่วยขึ้นทะเบียน Carbon Neutral Organization</li>
+      </ul>
+      <div style="margin-top:10px;font-size:12px;color:var(--text-muted);line-height:1.6">ราคาขึ้นกับปริมาณ Carbon Credit ที่ต้องการและ registry ที่เลือก (T-VER ฿174/tCO₂ · VERRA ราคาตลาด)</div>
+    </div>
+  </div>
+
+  <!-- GROUP 3+4: NET ZERO + GREEN FINANCE -->
+  <div class="sec-label">กลุ่มที่ 3 & 4 — Net Zero Pathway + Green Finance / ESG</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px">
+    <div class="card" style="border-top:3px solid var(--blue)">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <div style="background:var(--blue);color:#fff;font-size:10px;font-weight:700;font-family:var(--mono);padding:3px 8px;border-radius:4px">NET ZERO</div>
+        <div style="font-size:14px;font-weight:700;color:var(--navy)">Net Zero Pathway</div>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);font-family:var(--mono);margin-bottom:8px">ISO 14068-1 · SBTi · Carbon Neutral Org</div>
+      <ul style="list-style:none;font-size:13px;color:var(--text-sub)">
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">Net Zero Target Setting (SBTi aligned)</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">Decarbonization Roadmap 5–10 ปี</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">Scenario Analysis & Abatement Cost Curve</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">ISO 14068-1 Carbon Neutrality Certification</li>
+        <li style="padding:5px 0">Annual GHG Tracking + Progress Report</li>
+      </ul>
+      <div style="margin-top:10px;font-size:12px;font-family:var(--mono);color:var(--emerald-d);font-weight:600">฿180,000–350,000 ต่อองค์กร</div>
+      <div style="margin-top:6px;font-size:11px;color:var(--text-muted)">Target: SET-listed Companies, MNC Subsidiaries ที่มี Group Net Zero Target</div>
+    </div>
+
+    <div class="card" style="border-top:3px solid var(--blue)">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <div style="background:var(--blue);color:#fff;font-size:10px;font-weight:700;font-family:var(--mono);padding:3px 8px;border-radius:4px">ESG</div>
+        <div style="font-size:14px;font-weight:700;color:var(--navy)">Green Finance & ESG Strategy</div>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);font-family:var(--mono);margin-bottom:8px">IFRS S1/S2 · TCFD · Green Loan / Bond</div>
+      <ul style="list-style:none;font-size:13px;color:var(--text-sub)">
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">Green Finance Strategy (Green Loan/Bond)</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">ESG Strategy Planning + Sustainability Report</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">IFRS S1/S2 Disclosure Preparation</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--line)">TCFD / TNFD Climate Risk Assessment</li>
+        <li style="padding:5px 0">Supplier GHG Scope 3 Training & Data Collection</li>
+      </ul>
+      <div style="margin-top:10px;font-size:12px;font-family:var(--mono);color:var(--emerald-d);font-weight:600">฿120,000–280,000 ต่อองค์กร</div>
+      <div style="margin-top:6px;font-size:11px;color:var(--text-muted)">Target: บริษัทจดทะเบียน SET ที่ต้องรายงาน ONE Report / บริษัทที่สมัคร Green Loan</div>
+    </div>
+  </div>
+
+  <!-- FULL PRICING TABLE -->
+  <div class="sec-label">ตารางราคาครบทุกบริการ — เปรียบเทียบกับตลาด</div>
+  <div style="overflow-x:auto;margin-bottom:28px">
+    <table class="tbl">
+      <thead><tr><th>บริการ</th><th>กลุ่ม</th><th>มาตรฐาน</th><th>ราคาตลาด</th><th>หมอโรงงาน</th><th>หลัง OSMEP 50%</th><th>Target Sector</th></tr></thead>
+      <tbody>
+        <tr><td class="emph">CFO (Simple / Service)</td><td><span class="tag tag-navy" style="font-size:10px">กลุ่ม 1</span></td><td style="font-family:var(--mono);font-size:12px">ISO 14064-1</td><td>฿80k–150k</td><td class="emph sv-green">฿89k–129k</td><td style="color:var(--teal)">฿45k–65k</td><td style="font-size:12px">ทุก Sector</td></tr>
+        <tr><td class="emph">CFO (Manufacturing)</td><td><span class="tag tag-navy" style="font-size:10px">กลุ่ม 1</span></td><td style="font-family:var(--mono);font-size:12px">ISO 14064-1</td><td>฿120k–300k</td><td class="emph sv-green">฿149k–249k</td><td style="color:var(--teal)">฿75k–125k</td><td style="font-size:12px">Manufacturing, Energy</td></tr>
+        <tr><td class="emph">CFP per Product (LCA)</td><td><span class="tag tag-navy" style="font-size:10px">กลุ่ม 1</span></td><td style="font-family:var(--mono);font-size:12px">ISO 14067</td><td>฿50k–200k</td><td class="emph sv-green">฿69k–149k</td><td style="color:var(--teal)">฿35k–75k</td><td style="font-size:12px">Steel, Plastics, Auto, Food</td></tr>
+        <tr><td class="emph">CBAM Embedded Emissions</td><td><span class="tag tag-red" style="font-size:10px">กลุ่ม 1</span></td><td style="font-family:var(--mono);font-size:12px">EU Reg 2023/956</td><td>฿150k–500k+</td><td class="emph sv-green">฿179k–349k</td><td style="color:var(--teal)">฿90k–175k</td><td style="font-size:12px">Steel, Aluminum, Cement</td></tr>
+        <tr><td class="emph">Carbon Neutral Event</td><td><span class="tag tag-navy" style="font-size:10px">กลุ่ม 1</span></td><td style="font-family:var(--mono);font-size:12px">TGO Standard</td><td>฿40k–150k</td><td class="emph sv-green">฿45k–120k</td><td style="color:var(--teal)">฿23k–60k</td><td style="font-size:12px">Corporate Events</td></tr>
+        <tr><td class="emph">Green Logistics (ISO 14083)</td><td><span class="tag tag-navy" style="font-size:10px">กลุ่ม 1</span></td><td style="font-family:var(--mono);font-size:12px">ISO 14083</td><td>฿60k–180k</td><td class="emph sv-green">฿60k–150k</td><td style="color:var(--teal)">฿30k–75k</td><td style="font-size:12px">Logistics, Port</td></tr>
+        <tr><td class="emph">ISCC Certification</td><td><span class="tag tag-navy" style="font-size:10px">กลุ่ม 1</span></td><td style="font-family:var(--mono);font-size:12px">ISCC EU/PLUS</td><td>฿100k–250k</td><td class="emph sv-green">฿80k–200k</td><td style="color:var(--teal)">฿40k–100k</td><td style="font-size:12px">Biofuel, Biomass Exporters</td></tr>
+        <tr><td class="emph">T-VER Project Advisory</td><td><span class="tag tag-green" style="font-size:10px">กลุ่ม 2</span></td><td style="font-family:var(--mono);font-size:12px">TGO T-VER</td><td>฿200k–1M+</td><td class="emph sv-green">฿150k–500k</td><td>—</td><td style="font-size:12px">Solar, EV, Biogas, CCS</td></tr>
+        <tr><td class="emph">REC / Carbon Credit Offset</td><td><span class="tag tag-green" style="font-size:10px">กลุ่ม 2</span></td><td style="font-family:var(--mono);font-size:12px">I-REC / T-VER</td><td>ตลาด</td><td class="emph" style="color:var(--amber)">Advisory Fee + Pass-through</td><td>—</td><td style="font-size:12px">ทุก Sector ที่ต้อง Offset</td></tr>
+        <tr><td class="emph">Net Zero Pathway</td><td><span class="tag tag-blue" style="font-size:10px">กลุ่ม 3</span></td><td style="font-family:var(--mono);font-size:12px">ISO 14068-1 / SBTi</td><td>฿200k–500k</td><td class="emph sv-green">฿180k–350k</td><td style="color:var(--teal)">฿90k–175k</td><td style="font-size:12px">SET Listed, MNC</td></tr>
+        <tr><td class="emph">Green Finance / ESG</td><td><span class="tag tag-blue" style="font-size:10px">กลุ่ม 4</span></td><td style="font-family:var(--mono);font-size:12px">IFRS S1/S2 / TCFD</td><td>฿150k–400k</td><td class="emph sv-green">฿120k–280k</td><td style="color:var(--teal)">฿60k–140k</td><td style="font-size:12px">SET Listed, Green Loan</td></tr>
+        <tr><td class="emph">Supplier Scope 3 Training</td><td><span class="tag tag-blue" style="font-size:10px">กลุ่ม 4</span></td><td style="font-family:var(--mono);font-size:12px">GHG Protocol</td><td>฿15k–50k/person</td><td class="emph sv-green">฿25k–35k/person</td><td>—</td><td style="font-size:12px">Auto, Electronics Supply Chain</td></tr>
+        <tr><td class="emph">Carbon Readiness Scorecard</td><td><span class="tag tag-navy" style="font-size:10px">Lead Magnet</span></td><td>—</td><td>฿0–35k</td><td class="emph" style="color:var(--blue)">ฟรี 100%</td><td>—</td><td style="font-size:12px">ทุก Sector</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- BUNDLE UPSELL MATRIX -->
+  <div class="sec-label">Bundle Strategy — วิธีเพิ่ม ACV ต่อลูกค้า</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+    <div class="card" style="border-left:4px solid var(--red)">
+      <div style="font-size:11px;font-weight:700;font-family:var(--mono);color:var(--red);text-transform:uppercase;margin-bottom:8px">Bundle A — P1 CBAM Exporter</div>
+      <div style="font-size:22px;font-weight:800;color:var(--red);font-family:var(--mono);margin-bottom:4px">฿438,000</div>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px">หลัง OSMEP: ฿219,000</div>
+      <div style="font-size:13px;color:var(--text-sub)">
+        <div style="padding:5px 0;border-bottom:1px solid var(--line)">CBAM Embedded Emissions ฿249,000</div>
+        <div style="padding:5px 0;border-bottom:1px solid var(--line)">CFP ISO 14067 ฿89,000</div>
+        <div style="padding:5px 0">CFO ISO 14064 ฿100,000</div>
+      </div>
+      <div style="margin-top:10px;font-size:12px;color:var(--red);background:var(--red-dim);padding:8px;border-radius:6px">เหมาะกับ: โรงงาน Steel/Aluminum ส่งออก EU ที่ต้องการครบทุก Certificate</div>
+    </div>
+    <div class="card" style="border-left:4px solid var(--amber)">
+      <div style="font-size:11px;font-weight:700;font-family:var(--mono);color:var(--amber);text-transform:uppercase;margin-bottom:8px">Bundle B — P2 Supply Chain</div>
+      <div style="font-size:22px;font-weight:800;color:var(--amber);font-family:var(--mono);margin-bottom:4px">฿368,000</div>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px">หลัง OSMEP: ฿184,000</div>
+      <div style="font-size:13px;color:var(--text-sub)">
+        <div style="padding:5px 0;border-bottom:1px solid var(--line)">CFO ISO 14064 ฿149,000</div>
+        <div style="padding:5px 0;border-bottom:1px solid var(--line)">CFP per Product ฿89,000</div>
+        <div style="padding:5px 0">Supplier Scope 3 Training ฿130,000</div>
+      </div>
+      <div style="margin-top:10px;font-size:12px;color:var(--amber);background:var(--amber-dim);padding:8px;border-radius:6px">เหมาะกับ: Auto/Electronics Tier-1 Supplier ที่ Buyer ญี่ปุ่นกดดัน Scope 3</div>
+    </div>
+    <div class="card" style="border-left:4px solid var(--blue)">
+      <div style="font-size:11px;font-weight:700;font-family:var(--mono);color:var(--blue);text-transform:uppercase;margin-bottom:8px">Bundle C — P3 Green Loan + ESG</div>
+      <div style="font-size:22px;font-weight:800;color:var(--blue);font-family:var(--mono);margin-bottom:4px">฿309,000</div>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px">หลัง OSMEP: ฿154,500</div>
+      <div style="font-size:13px;color:var(--text-sub)">
+        <div style="padding:5px 0;border-bottom:1px solid var(--line)">CFO ISO 14064 ฿129,000</div>
+        <div style="padding:5px 0;border-bottom:1px solid var(--line)">Net Zero Roadmap ฿180,000</div>
+        <div style="padding:5px 0">— (discount bundle)</div>
+      </div>
+      <div style="margin-top:10px;font-size:12px;color:var(--blue);background:var(--blue-dim);padding:8px;border-radius:6px">เหมาะกับ: SME ที่สมัคร Green Loan กับธนาคาร — ธนาคารบังคับให้มี GHG Report</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════
+     TAB 4: MARKETING PLAYBOOK
+════════════════════════════════════════ -->
+<div class="section" id="tab6">
+<div class="page-body">
+  <div class="section-intro">
+    <h2>Marketing Playbook — รายละเอียดทุกช่องทาง</h2>
+    <p>Funnel หลัก: Facebook (Awareness) → LINE OA (Nurture) → Email (Direct Outreach) → FTI/Event (Legitimacy) → Sales (Close)</p>
+    <div class="intro-meta">
+      <span class="tag tag-amber">Budget: ฿30,000</span>
+      <span class="tag tag-green">Target CPL: ฿150–300</span>
+      <span class="tag tag-red">CBAM Deadline: ก.ย. 2027</span>
+    </div>
+  </div>
+
+  <!-- FACEBOOK -->
+  <div class="sec-label">Channel 1 — Facebook (Awareness + Lead Capture)</div>
+  <div class="two-col mb-24">
+    <div class="card">
+      <h3>Strategy: Education-first, Fear-of-Loss Close</h3>
+      <p><strong>เป้าหมาย:</strong> สร้าง Awareness ว่า CBAM มีผลต่อโรงงานไทยแล้ว และ หมอโรงงานคือผู้เชี่ยวชาญที่ช่วยได้</p>
+      <p><strong>Ad Objective:</strong> Lead Generation (Inline Form) — ไม่ส่งออก Website เพราะ Drop-off สูง</p>
+      <p><strong>Targeting:</strong></p>
+      <ul style="font-size:14px;color:var(--text-sub);padding-left:18px;margin-bottom:10px">
+        <li>Location: นิคมอุตสาหกรรม Eastern Seaboard, Map Ta Phut, Rayong, Chonburi, Samut Prakan</li>
+        <li>Interest: Manufacturing, Export, Industrial Business, Steel, Aluminum</li>
+        <li>Custom Audience: Upload email list 100+ clients</li>
+        <li>Lookalike 1% จาก Custom Audience</li>
+      </ul>
+      <p><strong>Budget:</strong> ฿13,000 ใน 90 วัน → เริ่ม ฿100/day → optimize ตาม CPL สัปดาห์ที่ 2</p>
+    </div>
+    <div class="card">
+      <h4>Video Series 6 ชิ้น (เรียงตาม Priority)</h4>
+      <table style="width:100%;font-size:13px;border-collapse:collapse">
+        <tr style="border-bottom:1px solid var(--line)">
+          <td style="padding:7px 0;color:var(--text-muted);width:28px">V1</td>
+          <td style="padding:7px 8px">"CBAM คือค่าปรับแอบซ่อน" — Hook ด้วยตัวเลข THB</td>
+          <td style="padding:7px 0"><span class="tag tag-red" style="font-size:9px">Week 1</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line)">
+          <td style="padding:7px 0;color:var(--text-muted)">V2</td>
+          <td style="padding:7px 8px">"CFO vs CFP ต่างกันอย่างไร?"</td>
+          <td style="padding:7px 0"><span class="tag tag-amber" style="font-size:9px">Week 2</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line)">
+          <td style="padding:7px 0;color:var(--text-muted)">V3</td>
+          <td style="padding:7px 8px">"5 ขั้นตอน CFO Certification"</td>
+          <td style="padding:7px 0"><span class="tag tag-amber" style="font-size:9px">Week 3</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line)">
+          <td style="padding:7px 0;color:var(--text-muted)">V4</td>
+          <td style="padding:7px 8px">"Case Study: โรงงาน A ประหยัด ฿X" — Social Proof</td>
+          <td style="padding:7px 0"><span class="tag tag-green" style="font-size:9px">Week 5</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--line)">
+          <td style="padding:7px 0;color:var(--text-muted)">V5</td>
+          <td style="padding:7px 8px">"CBAM Timeline 2026–2028" — Urgency</td>
+          <td style="padding:7px 0"><span class="tag tag-blue" style="font-size:9px">Week 6</span></td>
+        </tr>
+        <tr>
+          <td style="padding:7px 0;color:var(--text-muted)">V6</td>
+          <td style="padding:7px 8px">"Retarget: Q2 Sprint — จำกัด 10 slots"</td>
+          <td style="padding:7px 0"><span class="tag tag-red" style="font-size:9px">Week 8</span></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- LINE OA -->
+  <div class="sec-label">Channel 2 — LINE OA (Nurture + Convert)</div>
+  <div class="two-col mb-24">
+    <div class="card">
+      <h3>30-Day Nurture Sequence</h3>
+      <div class="funnel-step">
+        <div class="funnel-num" style="width:32px;height:32px;font-size:12px">D1</div>
+        <div class="funnel-content">
+          <div class="funnel-title" style="font-size:15px">ส่ง Carbon Readiness Scorecard ฟรี</div>
+          <div class="funnel-desc">PDF ภาษาไทย + CBAM Liability คำนวณ — ส่งภายใน 48 ชม. หลัง opt-in</div>
+        </div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-num" style="width:32px;height:32px;font-size:12px">D5</div>
+        <div class="funnel-content">
+          <div class="funnel-title" style="font-size:15px">Deep-dive ในจุดที่ Score ต่ำ</div>
+          <div class="funnel-desc">ส่ง Infographic เฉพาะหมวดที่ได้คะแนนต่ำ — Personalized</div>
+        </div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-num" style="width:32px;height:32px;font-size:12px">D14</div>
+        <div class="funnel-content">
+          <div class="funnel-title" style="font-size:15px">CBAM Deadline Reminder + Penalty Calculator</div>
+          <div class="funnel-desc">คำนวณ CBAM Penalty ตาม sector ของลูกค้า — ตัวเลข THB ชัดๆ</div>
+        </div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-num" style="width:32px;height:32px;font-size:12px">D21</div>
+        <div class="funnel-content">
+          <div class="funnel-title" style="font-size:15px">Case Study โรงงานใน Sector เดียวกัน</div>
+          <div class="funnel-desc">Peer social proof — "โรงงาน Steel ใน Rayong ประหยัดได้ ฿1.8M/ปี"</div>
+        </div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-num" style="width:32px;height:32px;font-size:12px">D28</div>
+        <div class="funnel-content">
+          <div class="funnel-title" style="font-size:15px">Personal CTA — นัด Consultation ฟรี</div>
+          <div class="funnel-desc">Sales ส่ง LINE ส่วนตัว: "ขอนัด 30 นาที คำนวณ CBAM savings ให้ฟรีครับ"</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>LINE OA Setup Checklist สำหรับ Marketing</h3>
+      <ul style="list-style:none;font-size:14px;color:var(--text-sub)">
+        <li style="padding:8px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--emerald);font-weight:700">01</span>ตั้ง Rich Menu: ฟรี Scorecard / จองปรึกษา / บริการ / โทรหาเรา</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--emerald);font-weight:700">02</span>Auto-reply: "ขอบคุณที่ติดต่อ — Scorecard จะส่งให้ภายใน 48 ชม."</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--emerald);font-weight:700">03</span>Tag Audience: CBAM / CFO / P1 / P2 / P3 ตาม Response</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--emerald);font-weight:700">04</span>Broadcast ตาม Tag — ไม่ส่ง Mass blast</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--line);display:flex;gap:8px"><span style="color:var(--emerald);font-weight:700">05</span>Escalate leads ที่ Response มาให้ Sales ภายใน 2 ชม.</li>
+        <li style="padding:8px 0;display:flex;gap:8px"><span style="color:var(--emerald);font-weight:700">06</span>วัด Open Rate, Response Rate, Conversion Rate รายสัปดาห์</li>
+      </ul>
+      <div class="alert alert-green" style="margin-top:14px;margin-bottom:0;font-size:13px">
+        <strong>KPI LINE OA:</strong> Read Rate ≥ 70% · Response Rate ≥ 15% · Leads to Consultation ≥ 20%
+      </div>
+    </div>
+  </div>
+
+  <!-- FTI / PARTNERSHIPS -->
+  <div class="sec-label">Channel 3 — FTI & Bank Partnerships (Legitimacy)</div>
+  <div class="two-col mb-24">
+    <div class="card">
+      <h3>FTI (สภาอุตสาหกรรมแห่งประเทศไทย)</h3>
+      <p><strong>เป้าหมาย:</strong> Co-host "CBAM Compliance Seminar" ฟรี กับ FTI Iron & Steel Industry Club</p>
+      <p><strong>Value Proposition ต่อ FTI:</strong> หมอโรงงาน Provide Expert Content, FTI Provide Audience และ Venue</p>
+      <p><strong>Format:</strong> Half-day Online/Hybrid · 40–60 ผู้เข้าร่วม · ลงทะเบียน = Lead</p>
+      <div class="funnel-meta" style="margin-top:10px">
+        <span class="funnel-metric">FTI: 12,000+ Member Companies</span>
+        <span class="funnel-metric">Iron & Steel Club: Direct CBAM Target</span>
+        <span class="funnel-metric">Target: สัปดาห์ 5</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Bank RM Partnership</h3>
+      <p><strong>Target Banks:</strong> Bangkok Bank, KBank, SCB (ทั้ง 3 มี Green Finance Products)</p>
+      <p><strong>ข้อเสนอ:</strong> หมอโรงงานเป็น Preferred Carbon Consultant ให้ลูกค้าที่สมัคร Green Loan</p>
+      <p><strong>RM Script:</strong> "ลูกค้าที่ต้องการ Green Loan ต้องมี GHG Data ก่อน — หมอโรงงานช่วยได้ และ OSMEP อุดหนุน 50%"</p>
+      <div class="funnel-meta" style="margin-top:10px">
+        <span class="funnel-metric">RM ต้องติดต่อ: 3 ธนาคาร × 2 RM/ธนาคาร</span>
+        <span class="funnel-metric">Timeline: สัปดาห์ 2</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENT CALENDAR -->
+  <div class="sec-label">Content Calendar 12 สัปดาห์</div>
+  <table class="tbl mb-24">
+    <thead><tr><th>สัปดาห์</th><th>Facebook</th><th>LINE OA</th><th>Email</th><th>Event/Offline</th><th>ผู้รับผิดชอบ</th></tr></thead>
+    <tbody>
+      <tr><td class="emph">W1–2</td><td>Video: "CBAM คืออะไร" + Lead Ad</td><td>Setup + Auto Sequence ชุดแรก</td><td>Cold Outreach P1 Batch 1</td><td>Referral Request ถึง 20 clients</td><td><span class="rp rp-mkt">MKT</span> <span class="rp rp-asst">ASST</span></td></tr>
+      <tr><td class="emph">W3–4</td><td>Video: "CFO vs CFP"</td><td>Broadcast P2: Scope 3 Series</td><td>Follow-up Email Batch 1</td><td>ติดต่อ FTI + Bank RM</td><td><span class="rp rp-mkt">MKT</span> <span class="rp rp-sales">SALES</span></td></tr>
+      <tr><td class="emph">W5–6</td><td>Video: "5 ขั้นตอน CFO"</td><td>CBAM Deadline Reminder</td><td>Cold Outreach P2 Batch 1</td><td><strong>CBAM Seminar ร่วมกับ FTI</strong></td><td><span class="rp rp-all">ALL</span></td></tr>
+      <tr><td class="emph">W7–8</td><td>Case Study (หลังปิด deal แรก)</td><td>Case Study Broadcast</td><td>Nurture P1 ที่ยังค้าง</td><td>Factory Visits P1 เพิ่มเติม</td><td><span class="rp rp-mkt">MKT</span> <span class="rp rp-sales">SALES</span></td></tr>
+      <tr><td class="emph">W9–10</td><td>Retarget: "Q2 Sprint" Scarcity</td><td>Scarcity Offer Broadcast</td><td>Cold Outreach P3 Batch 1</td><td>Seminar ครั้งที่ 2 (P3 Focus)</td><td><span class="rp rp-mkt">MKT</span> <span class="rp rp-asst">ASST</span></td></tr>
+      <tr><td class="emph">W11–12</td><td>Final Push: Deadline Video</td><td>Final CTA Broadcast</td><td>Final Push Email ทุก Pipeline</td><td>Review + Q3 Planning</td><td><span class="rp rp-all">ALL</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="sec-label">Budget Planner — เลือก 3 แบบ หรือปรับเองได้</div>
+
+  <!-- PLAN SELECTOR TABS -->
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px" id="bpTabs">
+    <button id="bpBtn-lean" onclick="window.bpLoad('lean')" style="padding:10px 20px;border-radius:var(--r-lg);border:1.5px solid var(--amber);background:var(--amber-dim);color:var(--amber);font-size:14px;font-weight:600;cursor:pointer;font-family:var(--sans);transition:all .15s">
+      แบบ Lean &nbsp;<span style="font-size:11px;background:rgba(217,119,6,0.18);padding:2px 7px;border-radius:10px">ประหยัด</span>
+    </button>
+    <button id="bpBtn-standard" onclick="window.bpLoad('standard')" style="padding:10px 20px;border-radius:var(--r-lg);border:1.5px solid var(--line2);background:var(--bg-card);color:var(--text-sub);font-size:14px;font-weight:500;cursor:pointer;font-family:var(--sans);transition:all .15s">
+      แบบ Standard &nbsp;<span style="font-size:11px;background:var(--emerald-dim);padding:2px 7px;border-radius:10px;color:var(--emerald-d)">แนะนำ</span>
+    </button>
+    <button id="bpBtn-max" onclick="window.bpLoad('max')" style="padding:10px 20px;border-radius:var(--r-lg);border:1.5px solid var(--line2);background:var(--bg-card);color:var(--text-sub);font-size:14px;font-weight:500;cursor:pointer;font-family:var(--sans);transition:all .15s">
+      แบบ Max &nbsp;<span style="font-size:11px;background:var(--blue-dim);padding:2px 7px;border-radius:10px;color:var(--blue)">เต็มแรง</span>
+    </button>
+    <button id="bpBtn-custom" onclick="window.bpLoad('custom')" style="padding:10px 20px;border-radius:var(--r-lg);border:1.5px dashed var(--line2);background:var(--bg-muted);color:var(--text-muted);font-size:14px;font-weight:500;cursor:pointer;font-family:var(--sans);transition:all .15s">
+      ปรับเอง (Custom)
+    </button>
+  </div>
+
+  <!-- PLAN DESCRIPTION -->
+  <div id="bpDesc" style="background:var(--navy);border-radius:var(--r-lg);padding:14px 20px;margin-bottom:20px;font-size:14px;color:rgba(255,255,255,0.75);line-height:1.65"></div>
+
+  <!-- SUMMARY METRICS -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px" id="bpSummary">
+    <div style="background:var(--bg-muted);border-radius:var(--r-lg);padding:16px 18px">
+      <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;font-family:var(--mono)">งบรวม</div>
+      <div style="font-size:26px;font-weight:700;color:var(--emerald-d);font-family:var(--mono)" id="bp-total">฿30,000</div>
+      <div style="font-size:12px;color:var(--text-sub);margin-top:3px">ตลอด 90 วัน</div>
+    </div>
+    <div style="background:var(--bg-muted);border-radius:var(--r-lg);padding:16px 18px">
+      <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;font-family:var(--mono)">Est. Leads</div>
+      <div style="font-size:26px;font-weight:700;color:var(--navy);font-family:var(--mono)" id="bp-leads">80</div>
+      <div style="font-size:12px;color:var(--text-sub);margin-top:3px">จากทุกช่องทาง</div>
+    </div>
+    <div style="background:var(--bg-muted);border-radius:var(--r-lg);padding:16px 18px">
+      <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;font-family:var(--mono)">CPL เฉลี่ย</div>
+      <div style="font-size:26px;font-weight:700;color:var(--amber);font-family:var(--mono)" id="bp-cpl">฿375</div>
+      <div style="font-size:12px;color:var(--text-sub);margin-top:3px">ต่อ Lead</div>
+    </div>
+    <div style="background:var(--bg-muted);border-radius:var(--r-lg);padding:16px 18px">
+      <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;font-family:var(--mono)">Est. Deals</div>
+      <div style="font-size:26px;font-weight:700;color:var(--navy);font-family:var(--mono)" id="bp-deals">10–16</div>
+      <div style="font-size:12px;color:var(--text-sub);margin-top:3px">@ 15–20% conv.</div>
+    </div>
+  </div>
+
+  <!-- SLIDERS -->
+  <div class="card" style="margin-bottom:18px">
+    <div style="font-size:13px;font-weight:600;color:var(--text-main);margin-bottom:14px">ปรับ Slider เพื่อทดสอบสัดส่วน</div>
+
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)">
+      <div style="flex:1;min-width:0">
+        <div style="font-size:14px;color:var(--text-main);font-weight:500">Facebook Ads</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-top:2px">Video + Lead Gen — Target นิคมอุตสาหกรรม</div>
+      </div>
+      <input type="range" id="bpsl-fb" min="0" max="50000" step="500" value="13000" oninput="window.bpCalc()" style="width:150px;flex-shrink:0">
+      <div style="font-size:14px;font-weight:600;font-family:var(--mono);color:var(--navy);width:82px;text-align:right;flex-shrink:0" id="bpv-fb">฿13,000</div>
+      <div style="font-size:12px;font-family:var(--mono);color:var(--text-muted);width:34px;text-align:right;flex-shrink:0" id="bpp-fb">43%</div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)">
+      <div style="flex:1;min-width:0">
+        <div style="font-size:14px;color:var(--text-main);font-weight:500">LINE OA + Automation</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-top:2px">Premium Plan + 30-Day Broadcast Sequence</div>
+      </div>
+      <input type="range" id="bpsl-line" min="0" max="20000" step="500" value="5000" oninput="window.bpCalc()" style="width:150px;flex-shrink:0">
+      <div style="font-size:14px;font-weight:600;font-family:var(--mono);color:var(--navy);width:82px;text-align:right;flex-shrink:0" id="bpv-line">฿5,000</div>
+      <div style="font-size:12px;font-family:var(--mono);color:var(--text-muted);width:34px;text-align:right;flex-shrink:0" id="bpp-line">17%</div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)">
+      <div style="flex:1;min-width:0">
+        <div style="font-size:14px;color:var(--text-main);font-weight:500">Seminar / Event</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-top:2px">CBAM Workshop ร่วมกับ FTI (Hybrid)</div>
+      </div>
+      <input type="range" id="bpsl-event" min="0" max="30000" step="500" value="5000" oninput="window.bpCalc()" style="width:150px;flex-shrink:0">
+      <div style="font-size:14px;font-weight:600;font-family:var(--mono);color:var(--navy);width:82px;text-align:right;flex-shrink:0" id="bpv-event">฿5,000</div>
+      <div style="font-size:12px;font-family:var(--mono);color:var(--text-muted);width:34px;text-align:right;flex-shrink:0" id="bpp-event">17%</div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)">
+      <div style="flex:1;min-width:0">
+        <div style="font-size:14px;color:var(--text-main);font-weight:500">Content Design</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-top:2px">Scorecard PDF, Infographic, CBAM Checklist</div>
+      </div>
+      <input type="range" id="bpsl-content" min="0" max="15000" step="500" value="4000" oninput="window.bpCalc()" style="width:150px;flex-shrink:0">
+      <div style="font-size:14px;font-weight:600;font-family:var(--mono);color:var(--navy);width:82px;text-align:right;flex-shrink:0" id="bpv-content">฿4,000</div>
+      <div style="font-size:12px;font-family:var(--mono);color:var(--text-muted);width:34px;text-align:right;flex-shrink:0" id="bpp-content">13%</div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)">
+      <div style="flex:1;min-width:0">
+        <div style="font-size:14px;color:var(--text-main);font-weight:500">Email Tool / CRM</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-top:2px">Track Pipeline, Follow-up, Analytics 3 เดือน</div>
+      </div>
+      <input type="range" id="bpsl-crm" min="0" max="15000" step="500" value="3000" oninput="window.bpCalc()" style="width:150px;flex-shrink:0">
+      <div style="font-size:14px;font-weight:600;font-family:var(--mono);color:var(--navy);width:82px;text-align:right;flex-shrink:0" id="bpv-crm">฿3,000</div>
+      <div style="font-size:12px;font-family:var(--mono);color:var(--text-muted);width:34px;text-align:right;flex-shrink:0" id="bpp-crm">10%</div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 0">
+      <div style="flex:1;min-width:0">
+        <div style="font-size:14px;color:var(--text-main);font-weight:500">Referral Incentive</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-top:2px">ของขวัญ/ส่วนลดสำหรับ Existing Clients ที่แนะนำ</div>
+      </div>
+      <input type="range" id="bpsl-ref" min="0" max="10000" step="500" value="0" oninput="window.bpCalc()" style="width:150px;flex-shrink:0">
+      <div style="font-size:14px;font-weight:600;font-family:var(--mono);color:var(--navy);width:82px;text-align:right;flex-shrink:0" id="bpv-ref">฿0</div>
+      <div style="font-size:12px;font-family:var(--mono);color:var(--text-muted);width:34px;text-align:right;flex-shrink:0" id="bpp-ref">0%</div>
+    </div>
+  </div>
+
+  <!-- VISUAL BARS -->
+  <div class="card" style="margin-bottom:18px">
+    <div style="font-size:13px;font-weight:600;color:var(--text-main);margin-bottom:14px">สัดส่วนงบตามช่องทาง</div>
+    <div id="bpBars"></div>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:14px" id="bpLegend"></div>
+  </div>
+
+  <!-- ROI PROJECTION + ALERT -->
+  <div class="card">
+    <div style="font-size:13px;font-weight:600;color:var(--text-main);margin-bottom:14px">Revenue Projection (90 วัน)</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px">
+      <div style="background:var(--bg-muted);border-radius:var(--r-lg);padding:14px 16px">
+        <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;font-family:var(--mono)">Conservative</div>
+        <div style="font-size:22px;font-weight:700;color:var(--emerald-d);font-family:var(--mono)" id="bp-rev-low">฿1.5M</div>
+        <div style="font-size:12px;color:var(--text-sub);margin-top:2px">Conversion 12%</div>
+      </div>
+      <div style="background:var(--bg-muted);border-radius:var(--r-lg);padding:14px 16px">
+        <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;font-family:var(--mono)">Base Case</div>
+        <div style="font-size:22px;font-weight:700;color:var(--blue);font-family:var(--mono)" id="bp-rev-mid">฿2.5M</div>
+        <div style="font-size:12px;color:var(--text-sub);margin-top:2px">Conversion 17%</div>
+      </div>
+      <div style="background:var(--bg-muted);border-radius:var(--r-lg);padding:14px 16px">
+        <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;font-family:var(--mono)">Optimistic</div>
+        <div style="font-size:22px;font-weight:700;color:var(--amber);font-family:var(--mono)" id="bp-rev-high">฿3.5M</div>
+        <div style="font-size:12px;color:var(--text-sub);margin-top:2px">Conversion 22%</div>
+      </div>
+    </div>
+    <div id="bpAlert"></div>
+  </div>
+
+
+</div>
+</div>
+
+<!-- ════════════════════════════════════════
+     TAB 5: EMAIL CAMPAIGNS
+════════════════════════════════════════ -->
+<div class="section" id="tab7">
+<div class="page-body">
+  <div class="section-intro">
+    <h2>Email Campaign — Direct PR to Industrial Clients</h2>
+    <p>Email ใช้สำหรับ <strong>Direct Outreach</strong> ไปยัง Factory Owner/Manager โดยตรง ไม่ใช่ Mass Blast<br>ทุก Email ต้องมีชื่อโรงงาน + ข้อมูลเฉพาะ = Personalized ระดับสูง</p>
+    <div class="intro-meta">
+      <span class="tag tag-red">Personalized ทุกฉบับ</span>
+      <span class="tag tag-green">ใช้ชื่อ-โรงงาน ไม่ใช่ Dear Sir</span>
+      <span class="tag tag-amber">Follow-up 3 รอบ ห่างกัน 5–7 วัน</span>
+    </div>
+  </div>
+
+  <div class="sec-label">Email 1 — Cold Outreach P1 (CBAM Exporters)</div>
+  <div class="email-block">
+    <div class="email-header">
+      <span class="email-header-title">📧 Email #1 — Cold Outreach / CBAM Urgency</span>
+      <span class="email-header-tag">P1 TARGET · WEEK 1</span>
+    </div>
+    <div class="email-meta">
+      <div class="email-meta-row"><span>TO:</span>คุณ [ชื่อผู้บริหาร] — ผู้จัดการ/เจ้าของ [ชื่อโรงงาน] จำกัด</div>
+      <div class="email-meta-row"><span>FROM:</span>ทีม Carbon Service | หมอโรงงาน &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d1b2b0a3b3bebf91bcbea3a3bebfb6b7b0b0bfffa5b9">[email&#160;protected]</a>&gt;</div>
+      <div class="email-meta-row"><span>CC:</span>[ผู้จัดการโรงงาน หรือ ฝ่ายสิ่งแวดล้อม ถ้ามีข้อมูล]</div>
+    </div>
+    <div class="email-body">
+      <span class="subj">หัวเรื่อง: [ชื่อโรงงาน] กับ CBAM — ต้นทุนส่งออก EU ของคุณกำลังจะเพิ่มขึ้น</span>
+      เรียน คุณ [ชื่อ],<br><br>
+      ผมชื่อ [ชื่อ Sales] จากทีม Carbon Service หมอโรงงาน — บริษัทที่ปรึกษาด้านการจัดการคาร์บอนสำหรับโรงงานอุตสาหกรรมไทย<br><br>
+      ทราบว่า [ชื่อโรงงาน] ส่งออก [Steel/Aluminum/Cement] ไปตลาด EU — ด้วยเหตุนี้จึงขอแจ้งเรื่องสำคัญที่ส่งผลต่อต้นทุนการส่งออกของคุณโดยตรงครับ
+      <div class="email-highlight">
+        ตั้งแต่ 1 มกราคม 2566 EU เริ่มบังคับใช้ CBAM (มาตรการปรับคาร์บอนก่อนเข้าพรมแดน) ในระยะเต็ม โรงงานที่ไม่มีข้อมูลการปล่อยก๊าซเรือนกระจกที่ผ่านการรับรอง จะต้องใช้ค่าอ้างอิงเริ่มต้น (Default Value) ซึ่งสูงกว่าความเป็นจริงถึง 3–17 เท่า — ส่งผลให้ต้นทุนการส่งออกเพิ่มขึ้นอย่างมีนัยสำคัญ
+      </div>
+      <strong>ตัวอย่างการประมาณการสำหรับ [Sector] ที่ส่งออก 1,000 ตัน/ปี:</strong><br>
+      • ต้นทุน CBAM หากใช้ Default Value: <strong>ประมาณ ฿600,000–1,200,000/ปี</strong><br>
+      • ต้นทุน CBAM หากมีข้อมูล Verified Actual: <strong>ประมาณ ฿200,000–400,000/ปี</strong><br>
+      • ประหยัดได้: <strong>ประมาณ ฿400,000–800,000/ปี</strong><br><br>
+      หมอโรงงานมีบริการ <strong>CBAM Fast-Track Package</strong> ที่ช่วยจัดทำข้อมูล Embedded Emissions และรายงาน CBAM ที่ถูกต้องตามมาตรฐาน EU Regulation 2023/956 ภายใน 6 สัปดาห์ ในราคา ฿249,000 — และสามารถขอรับเงินอุดหนุน 50% จากโครงการ BDS ของ OSMEP ได้ เหลือจ่ายจริงเพียง ฿124,500<br><br>
+      ขอเชิญรับ <strong>Carbon Readiness Scorecard</strong> ฟรี เพื่อประเมินสถานะและความเสี่ยง CBAM ของ [ชื่อโรงงาน] โดยไม่มีข้อผูกมัดใดๆ
+      <a class="email-cta" href="#">→ รับ Scorecard ฟรีทาง LINE</a><br><br>
+      หรือหากสะดวก ผมยินดีนัด Video Call 30 นาทีเพื่อคำนวณผลกระทบ CBAM เฉพาะสำหรับโรงงานของคุณ<br><br>
+      ขอบคุณครับ<br>
+      <strong>[ชื่อ Sales]</strong> | Carbon Service Consultant<br>
+      หมอโรงงาน Industrial Carbon Advisory | Tel: [เบอร์] | LINE: @morrongfaan
+    </div>
+    <div class="email-footer">📌 ส่งโดย: Sales Team · ผ่านทาง: Email Personal Account ไม่ใช่ Bulk Email · Personalize ชื่อโรงงาน + Sector + ตัวเลขประมาณการทุกฉบับ</div>
+  </div>
+
+  <div class="sec-label">Email 2 — Follow-up (ส่งวันที่ 5–7 หลังไม่มีการตอบ)</div>
+  <div class="email-block">
+    <div class="email-header">
+      <span class="email-header-title">📧 Email #2 — Follow-up / Value Add</span>
+      <span class="email-header-tag">ALL SEGMENTS · DAY 5–7</span>
+    </div>
+    <div class="email-meta">
+      <div class="email-meta-row"><span>TO:</span>[เหมือน Email #1]</div>
+      <div class="email-meta-row"><span>หมายเหตุ:</span>ส่งเฉพาะราย ที่ไม่มีการตอบกลับ Email #1</div>
+    </div>
+    <div class="email-body">
+      <span class="subj">หัวเรื่อง: [ชื่อโรงงาน] — อัปเดตล่าสุดเกี่ยวกับ CBAM + Checklist ฟรีสำหรับคุณ</span>
+      เรียน คุณ [ชื่อ],<br><br>
+      ติดตามจาก Email ที่ส่งไปเมื่อสัปดาห์ที่แล้วครับ — เข้าใจว่าผู้บริหารมีภารกิจมาก จึงขอสรุปประเด็นสำคัญที่สุดไว้ให้ 3 ข้อ:<br><br>
+      <div class="email-highlight">
+        1. CBAM ระยะเต็มเริ่มแล้ว ม.ค. 2026 — โรงงานที่ไม่เตรียมพร้อมจะเสียเปรียบทางการแข่งขันทันที<br>
+        2. Deadline ยื่น Certificate ครั้งแรก: กันยายน 2570 — เหลือเวลาไม่ถึง 18 เดือน<br>
+        3. OSMEP อุดหนุน 50% ค่าที่ปรึกษา — โอกาสที่ลดต้นทุน Compliance ได้ครึ่งหนึ่ง
+      </div>
+      <strong>แนบมาพร้อม Email นี้:</strong> CBAM Compliance Checklist สำหรับ [Sector] — ใช้ตรวจสอบความพร้อมด้วยตนเอง (2 หน้า ใช้เวลา 5 นาที)<br><br>
+      ถ้าสะดวก แค่ตอบกลับ Email นี้หรือกด LINE ด้านล่าง — ผมจะส่ง Scorecard ฉบับเต็มให้ทันทีครับ<br><br>
+      <a class="email-cta" href="#">→ คุยกับผมทาง LINE ได้เลย</a><br><br>
+      ขอบคุณสำหรับเวลาครับ<br>
+      <strong>[ชื่อ Sales]</strong> | หมอโรงงาน Carbon Service
+    </div>
+    <div class="email-footer">📌 แนบ PDF: CBAM Checklist 2 หน้า (ออกแบบโดย Marketing, จัดทำโดย Assistant) — ห้ามแนบไฟล์ขนาดใหญ่</div>
+  </div>
+
+  <div class="sec-label">Email 3 — Final Push (ส่งวันที่ 12–14 หลังไม่มีการตอบ)</div>
+  <div class="email-block">
+    <div class="email-header">
+      <span class="email-header-title">📧 Email #3 — Final Push / Scarcity</span>
+      <span class="email-header-tag">P1/P2 ONLY · DAY 12–14</span>
+    </div>
+    <div class="email-meta">
+      <div class="email-meta-row"><span>TO:</span>[เฉพาะรายที่ไม่ตอบ Email 1 และ 2]</div>
+      <div class="email-meta-row"><span>หมายเหตุ:</span>ส่งเฉพาะ P1 และ P2 เท่านั้น — ไม่ส่ง P3/P4 เพราะ urgency ต่ำกว่า</div>
+    </div>
+    <div class="email-body">
+      <span class="subj">หัวเรื่อง: ปิดรับ Q2 Sprint วันที่ [วันที่] — [ชื่อโรงงาน] ยังมีที่ว่างอยู่ 1 Slot</span>
+      เรียน คุณ [ชื่อ],<br><br>
+      นี่คือ Email สุดท้ายที่ส่งถึงคุณในรอบนี้ครับ<br><br>
+      หมอโรงงานเปิดรับโรงงาน <strong>Q2 Carbon Sprint</strong> — โครงการที่จะทำให้คุณมีข้อมูล CBAM พร้อมยื่นต่อ EU ภายในไตรมาส 2/2569 โดยจำกัดรับเพียง <strong>10 โรงงาน</strong> เพื่อให้ทีมที่ปรึกษาดูแลได้อย่างเต็มที่<br><br>
+      ขณะนี้เหลือ <strong>[X] slots</strong> — และโรงงาน [Sector] ที่ส่งออก EU ในช่วงนี้กำลังเร่งทำ CBAM กันมาก
+      <div class="email-highlight">
+        หากคุณตัดสินใจเข้าร่วมก่อน [วันที่]: ได้รับ 1 Year GHG Monitoring ฟรี (มูลค่า ฿60,000) และ OSMEP BDS Subsidy Filing Support ฟรี
+      </div>
+      ถ้าสนใจ ตอบ Email นี้หรือโทร [เบอร์] ได้เลยครับ — หากไม่สะดวกในช่วงนี้ ก็ยินดีติดต่อในไตรมาสถัดไปครับ<br><br>
+      ขอบคุณที่ให้เวลาตลอดช่วงนี้ครับ<br>
+      <strong>[ชื่อ Sales]</strong> | หมอโรงงาน Carbon Service<br>
+      Tel: [เบอร์] | LINE: @morrongfaan
+    </div>
+    <div class="email-footer">📌 หลัง Email #3: ถ้ายังไม่ตอบ → ย้ายไป Long-term Nurture ทาง LINE OA · อย่า Spam ต่อไป</div>
+  </div>
+
+  <div class="sec-label">Email 4 — Referral Request ถึง Existing Clients</div>
+  <div class="email-block">
+    <div class="email-header">
+      <span class="email-header-title">📧 Email #4 — Referral Request (Existing 20 Clients)</span>
+      <span class="email-header-tag">EXISTING CLIENTS · WEEK 1</span>
+    </div>
+    <div class="email-meta">
+      <div class="email-meta-row"><span>TO:</span>ลูกค้าเดิมที่ทำงานด้วยมาแล้ว (20 ราย)</div>
+      <div class="email-meta-row"><span>Sender:</span>ควรส่งจาก Account ของ Consultant ที่รับผิดชอบลูกค้านั้นๆ</div>
+    </div>
+    <div class="email-body">
+      <span class="subj">หัวเรื่อง: ขอความช่วยเหลือเล็กน้อย — และมีโปรพิเศษสำหรับคุณ</span>
+      เรียน คุณ [ชื่อ],<br><br>
+      ขอบคุณที่ไว้วางใจหมอโรงงานมาตลอด — เราดีใจมากที่ได้ร่วมงานกับ [ชื่อโรงงาน] ครับ<br><br>
+      เนื่องจากปัจจุบัน CBAM มีผลบังคับใช้แล้ว โรงงานหลายแห่งที่ส่งออก EU กำลังมองหาที่ปรึกษาด้าน Carbon อยู่ — ผมจึงอยากขอความช่วยเหลือจากคุณครับ<br><br>
+      <div class="email-highlight">
+        ถ้าคุณรู้จักโรงงานที่กำลังเผชิญกับ CBAM หรือต้องการทำ CFO/CFP ขอรบกวนแนะนำหมอโรงงานได้เลยครับ — เพื่อเป็นการขอบคุณ คุณจะได้รับ <strong>ส่วนลด 15% สำหรับ Service ถัดไป</strong> ทันทีที่โรงงานที่คุณแนะนำปิด Engagement กับเรา
+      </div>
+      แนะนำได้เลยโดย:<br>
+      • ตอบ Email นี้พร้อมชื่อและเบอร์ติดต่อ<br>
+      • หรือส่ง LINE ส่วนตัวถึงผมได้เลยครับ<br><br>
+      ขอบคุณล่วงหน้าครับ<br>
+      <strong>[ชื่อ Consultant]</strong> | หมอโรงงาน
+    </div>
+    <div class="email-footer">📌 เป้าหมาย: 20 clients × 2 referrals = 40 warm leads · Warm Lead Conversion ~30% = 12 deals จากช่องทางนี้เพียงช่องเดียว</div>
+  </div>
+
+  <div class="sec-label">แนวทางสำหรับ Sales และ Assistant ในการ Manage Email</div>
+  <div class="two-col mb-24">
+    <div class="card">
+      <h4>ขั้นตอน Sales — Email Workflow</h4>
+      <ol style="padding-left:20px;font-size:14px;color:var(--text-sub);line-height:2">
+        <li>รับ P1 List จาก Assistant (Excel แบ่ง Sector + Email)</li>
+        <li>Personalize Email #1 — ใส่ชื่อโรงงาน + Sector + ตัวเลขประมาณการ</li>
+        <li>ส่งด้วย Personal Email Account (ไม่ใช่ Bulk Tool)</li>
+        <li>วันที่ 5–7 หลังไม่ตอบ: ส่ง Email #2 + PDF Checklist</li>
+        <li>วันที่ 12–14 หลังไม่ตอบ: ส่ง Email #3 (P1/P2 เท่านั้น)</li>
+        <li>ถ้าตอบ: ตอบภายใน 2 ชม. + นัด Video Call ทันที</li>
+        <li>หลัง Email #3: ย้ายเข้า LINE OA Long-term Nurture</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h4>ขั้นตอน Assistant — Support Email Campaign</h4>
+      <ol style="padding-left:20px;font-size:14px;color:var(--text-sub);line-height:2">
+        <li>Research และ Verify Email Address ของ Factory Owner/Manager</li>
+        <li>จัดทำ Excel: ชื่อ-ตำแหน่ง-โรงงาน-Sector-Email-สถานะ</li>
+        <li>ออกแบบ CBAM Checklist PDF 2 หน้า (สำหรับแนบ Email #2)</li>
+        <li>Track Responses ใน CRM ทุกวัน — Flag ทุก Reply</li>
+        <li>ส่ง Carbon Readiness Scorecard ให้ทุก Lead ที่ขอ ภายใน 48 ชม.</li>
+        <li>Report Email Performance รายสัปดาห์ให้ทีม</li>
+      </ol>
+      <div class="alert alert-amber" style="margin-top:12px;margin-bottom:0;font-size:13px">
+        <strong>KPI Email:</strong> Open Rate ≥ 30% · Reply Rate ≥ 8% · Leads Qualified ≥ 5% ต่อ Campaign
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════
+     TAB 6: 90-DAY TIMELINE
+════════════════════════════════════════ -->
+<div class="section" id="tab8">
+<div class="page-body">
+  <div class="section-intro">
+    <h2>90-Day Execution Timeline</h2>
+    <p>Phase 1: Ignite (Day 1–30) · Phase 2: Convert (Day 31–60) · Phase 3: Scale (Day 61–90)</p>
+  </div>
+
+  <div class="stat-grid mb-32">
+    <div class="stat-card sc-green"><div class="stat-label">Deals ต้องปิด</div><div class="stat-value sv-green">10–20</div><div class="stat-sub">@ ฿150k–350k ต่อ deal</div></div>
+    <div class="stat-card sc-amber"><div class="stat-label">Leads ต้องการ</div><div class="stat-value sv-amber">80–100</div><div class="stat-sub">สมมติ Conversion 15–20%</div></div>
+    <div class="stat-card sc-blue"><div class="stat-label">จาก Referral ฟรี</div><div class="stat-value sv-blue">40–60</div><div class="stat-sub">20 clients × 2–3 referrals</div></div>
+    <div class="stat-card sc-green"><div class="stat-label">Sales Pace</div><div class="stat-value sv-green">3–5</div><div class="stat-sub">deals / สัปดาห์ (3 Sales)</div></div>
+  </div>
+
+  <div class="sec-label">Phase 1 — Ignite (Day 1–30)</div>
+  <div class="timeline mb-32">
+    <div class="tl-item">
+      <div class="tl-dot tld-red"></div>
+      <div class="tl-week">สัปดาห์ 1 — ทำทันทีวันแรก</div>
+      <div class="tl-title">Foundation: Data + Contact + Launch</div>
+      <div class="tl-body">
+        <ul class="tl-tasks">
+          <li><span class="rp rp-asst">Asst×3</span>รวบรวม 100+ Service Records → Excel แบ่ง P1/P2/P3 ระบุ Sector + Email + LINE</li>
+          <li><span class="rp rp-sales">Sales×3</span>โทร/LINE ส่วนตัวถึง P1 (ส่งออก EU) ทุกราย — เป้า: นัดได้ 10+ ราย</li>
+          <li><span class="rp rp-all">ทุกคน</span>ส่ง Referral Request Email + LINE ไปยัง 20 existing clients — ขอชื่อ 2 โรงงานที่ส่งออก EU</li>
+          <li><span class="rp rp-mkt">Marketing</span>Launch Facebook Video #1 "CBAM คืออะไร" + Lead Ad</li>
+          <li><span class="rp rp-asst">Asst</span>Setup LINE OA Rich Menu + Auto-reply + Sequence ชุดแรก</li>
+        </ul>
+        <div class="tl-kpi">KPI: <strong>Leads จาก FB 20+, นัดได้ 10+, Referral ชื่อ 15+</strong></div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot tld-red"></div>
+      <div class="tl-week">สัปดาห์ 2</div>
+      <div class="tl-title">Scorecard + Proposals + Bank RM</div>
+      <div class="tl-body">
+        <ul class="tl-tasks">
+          <li><span class="rp rp-asst">Asst</span>ส่ง Carbon Readiness Scorecard ฟรีให้ทุก Lead ภายใน 48 ชม.</li>
+          <li><span class="rp rp-sales">Sales</span>เยี่ยมโรงงาน P1 ที่นัดไว้ → Present CBAM Liability คำนวณ Live</li>
+          <li><span class="rp rp-sales">Sales</span>ส่ง Email Cold Outreach Batch 1 (P1 ที่ยังไม่ได้ติดต่อ)</li>
+          <li><span class="rp rp-mkt">Marketing</span>ติดต่อ FTI Iron & Steel Club เสนอ Co-host Seminar สัปดาห์ 5</li>
+          <li><span class="rp rp-sales">Sales</span>นัด RM ธนาคาร 3 แห่ง — เสนอ Referral Partnership</li>
+        </ul>
+        <div class="tl-kpi">KPI: <strong>Scorecard ส่งแล้ว 30+, Proposals ส่ง 8+, RM Meeting 3</strong></div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot tld-red"></div>
+      <div class="tl-week">สัปดาห์ 3–4</div>
+      <div class="tl-title">First Closes + OSMEP Subsidy</div>
+      <div class="tl-body">
+        <ul class="tl-tasks">
+          <li><span class="rp rp-sales">Sales</span>Follow-up Proposals ทุกราย — Push ปิด P1 Batch แรก</li>
+          <li><span class="rp rp-mkt">Marketing</span>Launch LINE OA Broadcast Sequence ไปยัง 100+ records</li>
+          <li><span class="rp rp-asst">Asst</span>ช่วย Client ที่ตกลงแล้วยื่น OSMEP BDS Subsidy = ลด 50%</li>
+          <li><span class="rp rp-sales">Sales</span>ส่ง Email Follow-up Batch 1 (วันที่ 5–7 หลังส่ง Cold)</li>
+        </ul>
+        <div class="tl-kpi">KPI เดือน 1: <strong>ปิด 3–5 deals · Revenue ฿600K–1.2M · Pipeline 35+</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-label">Phase 2 — Convert (Day 31–60)</div>
+  <div class="timeline mb-32">
+    <div class="tl-item">
+      <div class="tl-dot tld-amber"></div>
+      <div class="tl-week">สัปดาห์ 5–6</div>
+      <div class="tl-title">CBAM Seminar + Retarget Ads</div>
+      <div class="tl-body">
+        <ul class="tl-tasks">
+          <li><span class="rp rp-all">ทุกคน</span>จัด CBAM Compliance Seminar ร่วมกับ FTI — Hybrid 40–60 คน</li>
+          <li><span class="rp rp-mkt">Marketing</span>Launch Facebook Video #4 Case Study + Retarget "Q2 Sprint" Ads</li>
+          <li><span class="rp rp-sales">Sales</span>Follow-up proposals ที่ยังค้าง — Escalate urgency ด้วย Default Value Increase</li>
+          <li><span class="rp rp-asst">Asst</span>ส่ง Email Cold Outreach P2 Batch 1</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot tld-amber"></div>
+      <div class="tl-week">สัปดาห์ 7–8</div>
+      <div class="tl-title">Upsell + Case Study Publishing</div>
+      <div class="tl-body">
+        <ul class="tl-tasks">
+          <li><span class="rp rp-sales">Sales</span>Upsell Existing Clients: CBAM Package → Full Bundle (+ CFO Monitoring)</li>
+          <li><span class="rp rp-mkt">Marketing</span>เผยแพร่ Case Study จากลูกค้า Phase 1 ที่ปิดแล้ว — ตัวเลข THB ชัด</li>
+          <li><span class="rp rp-asst">Asst</span>ส่ง Scarcity Offer Email + LINE Broadcast ไปยัง Warm Leads ทั้งหมด</li>
+        </ul>
+        <div class="tl-kpi">KPI เดือน 2: <strong>deals สะสม 8–12 · Revenue สะสม ฿1.5M–2.2M</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-label">Phase 3 — Scale (Day 61–90)</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot tld-green"></div>
+      <div class="tl-week">สัปดาห์ 9–10</div>
+      <div class="tl-title">P4 Opening + Boost Ads</div>
+      <div class="tl-body">
+        <ul class="tl-tasks">
+          <li><span class="rp rp-mkt">Marketing</span>Boost Case Study Content ด้วยงบ Facebook ที่เหลือ</li>
+          <li><span class="rp rp-sales">Sales</span>เปิด P4 (Green Industry Upgrade) ด้วย CFO Package ฿129,000</li>
+          <li><span class="rp rp-asst">Asst</span>ส่ง "CBAM Q3 Reminder" Email ถึงทุก Proposals ที่ค้างอยู่</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot tld-green"></div>
+      <div class="tl-week">สัปดาห์ 11–12</div>
+      <div class="tl-title">Final Push — ปิด ฿3M</div>
+      <div class="tl-body">
+        <ul class="tl-tasks">
+          <li><span class="rp rp-sales">Sales</span>Push ทุก Warm Lead ที่ยังค้าง — "Q2 Sprint เหลือ Slot สุดท้าย"</li>
+          <li><span class="rp rp-all">ทุกคน</span>Weekly Pipeline Review — Accelerate deals ที่ใกล้ปิด</li>
+          <li><span class="rp rp-mkt">Marketing</span>วาง Content Plan Q3 เน้น Net Zero + Thailand Climate Change Act</li>
+        </ul>
+        <div class="tl-kpi">KPI เดือน 3: <strong>deals รวม 15–20 · Revenue ฿3M+ ✓ เป้าครบ</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════
+     TAB 7: TEAM CHECKLIST
+════════════════════════════════════════ -->
+<div class="section" id="tab9">
+<div class="page-body">
+  <div class="section-intro">
+    <h2>Team Action Checklist</h2>
+    <p>ติ๊กทุกงานที่ทำเสร็จ — ระบบจะ Track ความคืบหน้าให้อัตโนมัติ</p>
+  </div>
+
+  <div class="progress-wrap mb-32">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h4 id="progressLabel">ยังไม่เริ่ม — เริ่มติ๊กรายการด้านล่างได้เลย</h4>
+      <span id="progressPct" style="font-size:24px;font-weight:800;color:var(--emerald-d);font-family:var(--mono)">0%</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressBar" style="width:0%"></div></div>
+    <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);font-family:var(--mono)">
+      <span id="progressCount">0 / 32 tasks</span>
+      <span id="progressPhase">Phase: ยังไม่เริ่ม</span>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <div class="check-group-title"><span class="rp rp-asst">Assistants ×3</span> งาน Data + Admin + Content</div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>รวบรวม 100+ Service Records → Excel แบ่ง P1/P2/P3 ระบุ Sector/Email/LINE</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>Verify Email Address ของ Factory Owner/Manager ทุกราย</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>Research โรงงานส่งออก EU จาก BOI/กรมศุลกากร</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>ออกแบบ Carbon Readiness Scorecard PDF ภาษาไทย (5 มิติ + CBAM Liability)</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>จัดทำ CBAM Compliance Checklist 2 หน้า (สำหรับแนบ Email #2)</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>Setup LINE OA Rich Menu (ฟรี Scorecard / จองปรึกษา / บริการ / โทรหาเรา)</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>ตั้ง LINE OA Auto-reply + 30-Day Nurture Sequence</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>Upload Email List 100+ เข้า Facebook Custom Audience</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>ศึกษาขั้นตอน OSMEP BDS Subsidy + เตรียมเอกสารยื่น</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>Track Email/LINE Responses ใน CRM ทุกวัน + Flag ทุก Reply</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>ส่ง Carbon Readiness Scorecard ให้ทุก Lead ภายใน 48 ชม.</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>จัด Meeting + ส่ง Proposal + ติดตามเอกสารช่วย Sales</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>Report Performance รายสัปดาห์: FB CPL, Email Open Rate, LINE Response Rate</label></div>
+
+      <div class="check-group-title" style="margin-top:28px"><span class="rp rp-mkt">Marketing Lead ×1</span> งาน Content + Channel + Partnership</div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>สร้าง Facebook Video Series 6 ชิ้น ตาม Content Calendar</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>ตั้ง Facebook Lead Ad — Targeting: Industrial Zones + Custom Audience</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>ออกแบบ Infographic: CBAM Timeline 2026–2028 (สำหรับ FB + LINE)</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>ติดต่อ FTI Iron & Steel Club — เสนอ Co-host CBAM Seminar สัปดาห์ 5</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>ติดต่อ RM KBank + SCB + Bangkok Bank — เสนอ Referral Partnership</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>วาง Content Calendar สัปดาห์ 1–12 ครบทุก Channel</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>สร้าง Case Study หลังปิด Deal แรก — ตัวเลข THB ชัดเจน</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>Monitor CPL + Conversion Rate รายสัปดาห์ + Optimize ถ้า CPL > ฿400</label></div>
+    </div>
+    <div>
+      <div class="check-group-title"><span class="rp rp-sales">Sales Team ×3</span> งาน Hunter + Email + Close</div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>รับ P1 List จาก Asst → โทร/LINE ส่วนตัว ทุกรายในสัปดาห์แรก</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>ส่ง Referral Request Email + LINE ส่วนตัว ไปยัง 20 Existing Clients</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>Personalize + ส่ง Email Cold Outreach #1 ให้ P1 ทุกราย</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>ส่ง Email #2 (วันที่ 5–7 หลัง #1) พร้อมแนบ CBAM Checklist PDF</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>ส่ง Email #3 Final Push (วันที่ 12–14) เฉพาะ P1/P2 ที่ยังไม่ตอบ</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>เยี่ยมโรงงาน P1 ที่นัดได้ → Present CBAM Liability คำนวณ Live</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>ส่ง Proposal ภายใน 24 ชม. หลัง First Contact</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>แนะนำ OSMEP BDS ให้ทุก Prospect — ลดราคา 50% ทันที</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>Follow-up Proposal ทุกสัปดาห์ตั้งแต่วันที่ส่ง</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>Update Pipeline ใน CRM ทุกวันศุกร์ — ระบุสถานะ/เหตุผลที่ยังไม่ปิด</label></div>
+      <div class="check-item" onclick="window.toggleCheck(this)"><input type="checkbox"><label>ตอบ Reply ทุกรายที่ตอบกลับ Email/LINE ภายใน 2 ชม.</label></div>
+
+      <div class="alert alert-navy" style="margin-top:24px">
+        <strong>Sales Principle สำคัญ:</strong><br>
+        ไม่ใช้ Hard Sell · ใช้ตัวเลข THB เสมอ · คำนวณ ROI ให้เห็น Live ·<br>
+        นัดเยี่ยมโรงงาน ไม่ใช้แค่โทร · OSMEP Subsidy คือ objection killer สำรอง ·<br>
+        หลัง Deal ปิด: ขอ Referral ทันที 2 ชื่อ
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<script>
+(function(){
+  /* ── Tab switch ── */
+  var _tabs = document.querySelectorAll('.nav-tab');
+  var _sects = document.querySelectorAll('.section');
+
+  window.switchTab = function(i){
+    _tabs.forEach(function(t,j){ t.classList.toggle('active', i===j); });
+    _sects.forEach(function(s,j){ s.classList.toggle('active', i===j); });
+    window.scrollTo({top:0, behavior:'smooth'});
+    if(i===4){ try{ window.sgTab(0); }catch(e){} }
+  };
+
+  /* ── Checklist ── */
+  window.toggleCheck = function(el){
+    var cb = el.querySelector('input[type="checkbox"]');
+    cb.checked = !cb.checked;
+    el.classList.toggle('done', cb.checked);
+    window.updateProgress();
+  };
+
+  document.querySelectorAll('.check-item input').forEach(function(cb){
+    cb.addEventListener('change', window.updateProgress);
+  });
+
+  window.updateProgress = function(){
+    var all = document.querySelectorAll('.check-item input[type="checkbox"]');
+    var done = Array.from(all).filter(function(c){ return c.checked; }).length;
+    var pct = Math.round(done / all.length * 100);
+    var pb = document.getElementById('progressBar');
+    var pp = document.getElementById('progressPct');
+    var pc = document.getElementById('progressCount');
+    var pl = document.getElementById('progressLabel');
+    var pph= document.getElementById('progressPhase');
+    if(pb) pb.style.width = pct + '%';
+    if(pp) pp.textContent = pct + '%';
+    if(pc) pc.textContent = done + ' / ' + all.length + ' tasks';
+    var labels = ['ยังไม่เริ่ม — เริ่มติ๊กรายการได้เลย','เริ่มต้นแล้ว — ลุย!','กำลังดี — ไปต่อ!','เกือบครบแล้ว!','ครบทุก Task พร้อม Execute!'];
+    var phases = ['ยังไม่เริ่ม','Phase 1','Phase 2','Phase 3','Complete'];
+    var idx = pct===0?0:pct<30?1:pct<60?2:pct<100?3:4;
+    if(pl) pl.textContent = labels[idx];
+    if(pph) pph.textContent = 'Phase: ' + phases[idx];
+  };
+
+  /* ── Scroll progress ── */
+  window.addEventListener('scroll', function(){
+    var el = document.documentElement;
+    var pct = el.scrollTop / (el.scrollHeight - el.clientHeight) * 100;
+    var sb = document.getElementById('scrollBar');
+    if(sb) sb.style.width = pct + '%';
+  });
+
+  /* ── Budget planner ── */
+  var BP_PLANS = {
+    lean:     {fb:6000,  line:2500, event:0,     content:2000, crm:2000, ref:0,    note:'<strong style="color:var(--emerald)">แบบ Lean ~฿12,500</strong> — เน้น Referral + Direct Email ใช้ Digital Budget น้อยที่สุด เหมาะเมื่อทีมมีฐาน Relationship แข็งแกร่งอยู่แล้ว'},
+    standard: {fb:13000, line:5000, event:5000,  content:4000, crm:3000, ref:0,    note:'<strong style="color:var(--emerald)">แบบ Standard ฿30,000 — แนะนำ</strong> — สมดุลทุกช่องทาง ครอบคลุม Digital + Offline เหมาะเป็น Default Phase 1'},
+    max:      {fb:20000, line:8000, event:8000,  content:6000, crm:4000, ref:2000, note:'<strong style="color:var(--emerald)">แบบ Max ~฿48,000</strong> — ใช้แรงสูงสุด Dominate ตลาด CBAM ก่อนคู่แข่ง'},
+    custom:   {fb:13000, line:5000, event:5000,  content:4000, crm:3000, ref:0,    note:'<strong style="color:var(--amber)">โหมด Custom</strong> — ลาก Slider เพื่อทดสอบสัดส่วนเอง'}
+  };
+  var BP_COLORS={fb:'#0A192F',line:'#059669',event:'#D97706',content:'#534AB7',crm:'#888780',ref:'#993C1D'};
+  var BP_LABELS={fb:'Facebook Ads',line:'LINE OA',event:'Seminar',content:'Content',crm:'CRM',ref:'Referral'};
+
+  function bpFmt(n){ return '฿'+Number(n).toLocaleString(); }
+
+  window.bpLoad = function(name){
+    ['lean','standard','max','custom'].forEach(function(k){
+      var btn = document.getElementById('bpBtn-'+k);
+      if(!btn) return;
+      if(k===name){
+        var cols={lean:'var(--amber)',standard:'var(--emerald-d)',max:'var(--blue)',custom:'var(--navy)'};
+        var bgs={lean:'var(--amber-dim)',standard:'var(--emerald-dim)',max:'var(--blue-dim)',custom:'var(--bg-dark)'};
+        btn.style.border='1.5px solid '+cols[k];
+        btn.style.background=bgs[k];
+        btn.style.color=cols[k];
+        btn.style.fontWeight='600';
+      } else {
+        btn.style.border='1.5px solid var(--line2)';
+        btn.style.background='var(--bg-card)';
+        btn.style.color='var(--text-sub)';
+        btn.style.fontWeight='500';
+      }
+    });
+    var p = BP_PLANS[name];
+    ['fb','line','event','content','crm','ref'].forEach(function(k){
+      var el=document.getElementById('bpsl-'+k);
+      if(el) el.value=p[k];
+    });
+    var desc=document.getElementById('bpDesc');
+    if(desc) desc.innerHTML=p.note;
+    window.bpCalc();
+  };
+
+  window.bpCalc = function(){
+    var keys=['fb','line','event','content','crm','ref'];
+    var v={};
+    keys.forEach(function(k){ var el=document.getElementById('bpsl-'+k); v[k]=el?+el.value:0; });
+    var total=keys.reduce(function(s,k){return s+v[k];},0);
+    keys.forEach(function(k){
+      var pct=total>0?Math.round(v[k]/total*100):0;
+      var ve=document.getElementById('bpv-'+k), pe=document.getElementById('bpp-'+k);
+      if(ve) ve.textContent=bpFmt(v[k]);
+      if(pe) pe.textContent=pct+'%';
+    });
+    var totEl=document.getElementById('bp-total'); if(totEl) totEl.textContent=bpFmt(total);
+    var leads=Math.round(v.fb/280)+Math.round(v.line/220)+Math.round(v.event/160)+Math.round(v.ref/120)+12;
+    var cpl=leads>0?Math.round(total/leads):0;
+    var leEl=document.getElementById('bp-leads'); if(leEl) leEl.textContent=leads;
+    var cplEl=document.getElementById('bp-cpl'); if(cplEl) cplEl.textContent=bpFmt(cpl);
+    var dL=Math.round(leads*0.12),dM=Math.round(leads*0.17),dH=Math.round(leads*0.22);
+    var deEl=document.getElementById('bp-deals'); if(deEl) deEl.textContent=dL+'–'+dH;
+    var fmtM=function(n){return '฿'+(Math.round(n/100000)/10).toFixed(1)+'M';};
+    var rl=document.getElementById('bp-rev-low'),rm=document.getElementById('bp-rev-mid'),rh=document.getElementById('bp-rev-high');
+    if(rl) rl.textContent=fmtM(dL*150000);
+    if(rm) rm.textContent=fmtM(dM*220000);
+    if(rh) rh.textContent=fmtM(dH*300000);
+    var maxV=Math.max.apply(null,keys.map(function(k){return v[k];}));maxV=maxV||1;
+    var barsEl=document.getElementById('bpBars');
+    if(barsEl){
+      barsEl.innerHTML=keys.map(function(k){
+        var pct=total>0?Math.round(v[k]/total*100):0;
+        var bw=Math.round(v[k]/maxV*100);
+        return '<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text-sub);margin-bottom:4px"><span>'+BP_LABELS[k]+'</span><span style="font-family:var(--mono);font-weight:600">'+bpFmt(v[k])+' <span style="color:var(--text-muted);font-weight:400">('+pct+'%)</span></span></div><div style="height:10px;background:var(--bg-dark);border-radius:5px;overflow:hidden"><div style="height:100%;width:'+bw+'%;background:'+BP_COLORS[k]+';border-radius:5px;transition:width .3s ease"></div></div></div>';
+      }).join('');
+    }
+    var legEl=document.getElementById('bpLegend');
+    if(legEl){ legEl.innerHTML=keys.map(function(k){return '<span style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--text-sub)"><span style="width:10px;height:10px;border-radius:2px;background:'+BP_COLORS[k]+';flex-shrink:0"></span>'+BP_LABELS[k]+'</span>';}).join(''); }
+    var alertEl=document.getElementById('bpAlert');
+    if(alertEl){
+      var fbPct=total>0?v.fb/total:0, revH=dH*300000;
+      if(total<12000){ alertEl.innerHTML='<div style="background:var(--amber-dim);border-left:3px solid var(--amber);border-radius:0 var(--r) var(--r) 0;padding:11px 16px;font-size:13px;color:var(--amber);line-height:1.6">งบต่ำกว่า ฿12,000 — เพิ่มแรง Referral และ Direct Email แทน</div>'; }
+      else if(fbPct>0.65){ alertEl.innerHTML='<div style="background:var(--amber-dim);border-left:3px solid var(--amber);border-radius:0 var(--r) var(--r) 0;padding:11px 16px;font-size:13px;color:var(--amber);line-height:1.6">Facebook สูงเกิน 65% — ควรเก็บงบบางส่วนไว้สำหรับ Seminar และ LINE OA</div>'; }
+      else if(revH>=3000000){ alertEl.innerHTML='<div style="background:var(--emerald-dim);border-left:3px solid var(--emerald-d);border-radius:0 var(--r) var(--r) 0;padding:11px 16px;font-size:13px;color:var(--emerald-d);line-height:1.6"><strong>เป้า ฿3M ทำได้</strong> — ด้วยงบ '+bpFmt(total)+' ประมาณ '+leads+' leads ปิดได้ '+dL+'–'+dH+' deals</div>'; }
+      else{ alertEl.innerHTML='<div style="background:var(--red-dim);border-left:3px solid var(--red);border-radius:0 var(--r) var(--r) 0;padding:11px 16px;font-size:13px;color:var(--red);line-height:1.6">Revenue สูงสุดที่คาดได้ '+fmtM(revH)+' — ยังไม่ถึง ฿3M เพิ่มงบ Facebook หรือ Seminar</div>'; }
+    }
+  };
+
+  /* ── Sales Guide sub-tabs ── */
+  window.sgTab = function(n){
+    for(var i=0;i<5;i++){
+      var panel=document.getElementById('sg-panel-'+i);
+      var btn=document.getElementById('sgBtn-'+i);
+      if(panel) panel.style.display=(i===n)?'block':'none';
+      if(btn){
+        if(i===n){ btn.style.background='var(--navy)'; btn.style.color='#fff'; btn.style.border='2px solid var(--navy)'; btn.style.fontWeight='600'; }
+        else{ btn.style.background='var(--bg-card)'; btn.style.color='var(--text-sub)'; btn.style.border='1.5px solid var(--line2)'; btn.style.fontWeight='500'; }
+      }
+    }
+  };
+
+  /* ── Init on DOMContentLoaded ── */
+  document.addEventListener('DOMContentLoaded', function(){
+    window.bpLoad('lean');
+    window.sgTab(0);
+  });
+
+})();
+</script>
+</body>
+</html>
